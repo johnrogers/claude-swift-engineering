@@ -60,7 +60,9 @@ Modern Swift/SwiftUI development toolkit with TCA support for Claude Code.
 | Skill | Purpose |
 |-------|---------|
 | `modern-swift` | Swift 6.2 concurrency essentials (async/await, actors, @MainActor) |
+| `swift-common-patterns` | Architecture patterns (DefaultProvider, actors, DI, networking) |
 | `modern-swiftui` | Modern SwiftUI patterns (iOS 17+, @Observable, @Bindable) |
+| `swiftui-common-patterns` | SwiftUI patterns (MVVM, navigation, performance, accessibility) |
 | `composable-architecture` | TCA patterns and best practices |
 | `ios-hig` | Apple Human Interface Guidelines |
 | `swift-testing` | Swift Testing framework patterns |

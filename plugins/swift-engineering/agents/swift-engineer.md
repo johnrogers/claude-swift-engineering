@@ -3,7 +3,7 @@ name: swift-engineer
 description: Implement vanilla Swift code — models, services, networking, persistence. Use when the plan specifies vanilla Swift (not TCA) architecture.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
-skills: modern-swift, sqlite-data, swift-style
+skills: modern-swift, swift-common-patterns, sqlite-data, swift-style
 ---
 
 # Swift Core Implementation
