@@ -1,0 +1,21 @@
+{
+  "name": "swift-development",
+  "version": "0.1.0",
+  "description": "Modern Swift/SwiftUI development toolkit with TCA support. Provides agents for planning, implementing, testing, documenting, and building Swift features.",
+  "keywords": [
+    "swift",
+    "swiftui",
+    "ios",
+    "macos",
+    "tca",
+    "composable-architecture",
+    "mobile",
+    "apple"
+  ],
+  "mcpServers": {
+    "sosumi": {
+      "transport": "http",
+      "url": "https://sosumi.ai/mcp"
+    }
+  }
+}

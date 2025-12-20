@@ -1,0 +1,50 @@
+{
+  "name": "claude-swift-engineering",
+  "metadata": {
+    "description": "A marketplace containing Swift plugin(s) related to the Swift engineering craft.",
+    "version": "0.1.0"
+  },
+  "source": {
+    "source": "github",
+    "repo": "claude-swift-engineering"
+  },
+  "owner": {
+    "name": "John Rogers"
+  },
+  "repository": "https://github.com/johnrogers/",
+  "license": "MIT",
+  "keywords": ["swift", "engineering", "mobile", "ios", "watchos", "software development", "software engineering", "tca"],
+  "plugins": [
+    {
+      "name": "swift-engineering",
+      "description": "A collection of agents and commands to aid in the planning, implementation, documentation and testing of Swift/TCA code.",
+      "version": "0.1.0",
+      "author": {
+        "name": "John Rogers (@johnrogers)"
+      },
+      "source": "./plugins/swift-engineering",
+      "category": "development",
+      "keywords": [
+        "swift",
+        "apple",
+        "ios",
+        "ipados",
+        "macos",
+        "tvos",
+        "visionos",
+        "watchos"
+      ],
+      "tags": [
+        "swift",
+        "apple",
+        "ios",
+        "ipados",
+        "macos",
+        "tvos",
+        "visionos",
+        "watchos"
+      ],
+      "strict": false
+    }
+  ]
+}
