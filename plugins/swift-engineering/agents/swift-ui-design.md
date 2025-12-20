@@ -25,6 +25,7 @@ Do NOT use Write or Edit tools on implementation files.
 
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
+**Context Budget:** Target <100K tokens; if unavoidable to exceed, prioritize critical UI design decisions
 
 ## Before Analysis
 

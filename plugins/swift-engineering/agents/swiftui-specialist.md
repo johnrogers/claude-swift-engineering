@@ -1,7 +1,7 @@
 ---
 name: swiftui-specialist
 description: Implement SwiftUI views following Apple HIG guidelines. Use after core/TCA implementation is complete.
-tools: Read, Write, Edit, Glob, Grep
+tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
 skills: modern-swift, modern-swiftui, swiftui-common-patterns, ios-hig, swift-style
 ---
@@ -109,7 +109,8 @@ Before returning to main:
 
 | Condition | Next Agent | Why |
 |-----------|------------|-----|
-| Views complete | @swift-test-creator | Test phase |
+| Views complete (with review) | @swift-code-reviewer | Optional quality check before testing |
+| Views complete (skip review) | @swift-test-creator | Proceed directly to test phase |
 | Business logic needed in view | @tca-engineer or @swift-engineer | Views must be declarative |
 | Build error after 2 attempts | @swift-builder | Mechanical fix expertise |
 

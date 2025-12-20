@@ -1,7 +1,7 @@
 ---
 name: tca-architect
 description: Design TCA (The Composable Architecture) feature architectures — state, actions, dependencies, navigation. Use when the plan specifies TCA and detailed architecture design is needed.
-tools: Read, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash
 model: opus
 skills: modern-swift, swift-common-patterns, composable-architecture
 ---
@@ -25,6 +25,7 @@ Do NOT use Write or Edit tools on Swift files.
 
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
+**Context Budget:** Target <100K tokens; if unavoidable to exceed, prioritize critical TCA design decisions
 
 ## Before Starting
 

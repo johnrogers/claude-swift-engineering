@@ -77,7 +77,7 @@ Do NOT modify any files.
 2. Attempt fix
 3. Rebuild
 4. If fixed → continue
-5. If still failing after 3 attempts → write to handoff notes, hand off to specialist
+5. If still failing after 3 attempts → use Error Triage table to determine specialist, write to handoff notes, hand off
 
 #### On Build Success with Warnings
 
@@ -91,6 +91,18 @@ Only fix warnings user approves.
 #### On Clean Build
 
 > "✓ Build successful. No errors or warnings."
+
+## Error Triage
+
+Categorize errors to determine the appropriate specialist:
+
+| Error Category | Example | Specialist |
+|----------------|---------|------------|
+| **TCA-specific** | Reducer composition, Effect cancellation, TestStore failures | @tca-engineer |
+| **SwiftUI** | View body errors, modifier issues, @State/@Binding problems | @swiftui-specialist |
+| **Core logic** | Business logic errors, model validation, data transformation | @swift-engineer |
+| **Test code** | Test assertion failures, test setup issues | @swift-test-creator |
+| **Simple fixes** | Missing imports, typos, trivial type mismatches | Fix directly (swift-builder) |
 
 ## Common Error Patterns
 

@@ -160,9 +160,9 @@ OR
 
 **WHY:** Views are declarative only. Separating view implementation ensures no business logic leaks into the view layer.
 
-**BOUNDARY:** Hand off to @swift-code-reviewer (optional) or @swift-test-creator when views are complete.
+**BOUNDARY:** Ask if user wants code review. If no, ask if user wants tests. Hand off accordingly.
 
-*If semi-guided:* "Views implemented. Run code review or proceed to testing?"
+*If semi-guided:* "Views implemented. Would you like me to run a code review? (If no, I'll ask about testing next)"
 
 ---
 
@@ -174,13 +174,13 @@ OR
 
 **WHY:** Catch quality, security, and performance issues before testing.
 
-**BOUNDARY:** If issues found, hand back to implementation agent. Otherwise, hand off to @swift-test-creator.
+**BOUNDARY:** If issues found, hand back to implementation agent. Otherwise, ask if user wants tests.
 
-*If semi-guided:* "Review complete. Ready for testing?"
+*If semi-guided:* "Review complete. Would you like me to create tests? (If no, I'll proceed to build verification)"
 
 ---
 
-#### Phase 7: Testing
+#### Phase 7: Testing (optional)
 
 ```
 @swift-test-creator
