@@ -1,8 +1,7 @@
 {
   "name": "claude-swift-engineering",
   "metadata": {
-    "description": "A marketplace containing Swift plugin(s) related to the Swift engineering craft.",
-    "version": "0.1.0"
+    "description": "A marketplace containing Swift plugin(s) related to the Swift engineering craft."
   },
   "source": {
     "source": "github",
