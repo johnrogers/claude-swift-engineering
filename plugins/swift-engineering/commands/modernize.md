@@ -40,7 +40,22 @@ Ask if not specified:
 > 2. **Specific pattern** — e.g., 'RxSwift to async/await', 'UIKit to SwiftUI'
 > 3. **Full audit** — Scan entire codebase for modernization opportunities"
 
-### 2. Analyze
+### 2. IMMEDIATELY Invoke Modernization Agent
+
+After gathering scope, your VERY NEXT ACTION must be to invoke the modernizer agent:
+
+```
+Task(
+  subagent_type: "swift-engineering:swift-modernizer",
+  description: "Analyze code for modernization",
+  prompt: "Analyze [scope] for modernization opportunities. [Include specific pattern if provided]"
+)
+```
+
+⛔ **DO NOT** call `EnterPlanMode`. The agent IS the modernization mechanism.
+⛔ **DO NOT** use Read, Grep, or Glob tools to analyze code yourself.
+
+### 3. Analyze
 
 ```
 @swift-modernizer
@@ -48,7 +63,7 @@ Ask if not specified:
 
 **WHY:** Expert in legacy patterns and modern replacements. Preserves functionality while updating to current Swift best practices. Uses `programming-swift` skill for language reference when needed.
 
-### 3. Migration Report
+### 4. Migration Report
 
 @swift-modernizer produces an analysis:
 
@@ -79,7 +94,7 @@ Ask if not specified:
 2. `UIDevice.current.userInterfaceIdiom` → Environment check
 ```
 
-### 4. Execute Migration
+### 5. Execute Migration
 
 Ask:
 > "Which migrations would you like to proceed with?
@@ -93,7 +108,7 @@ Ask:
 - Maintain backward compatibility where needed
 - Create clear git commits
 
-### 5. Verify
+### 6. Verify
 
 ```
 @swift-builder
@@ -101,7 +116,7 @@ Ask:
 
 **WHY:** Ensure modernized code compiles and tests pass. Catch any issues introduced by migration.
 
-### 6. Completion
+### 7. Completion
 
 Summarize results:
 > "✓ **Modernization complete**

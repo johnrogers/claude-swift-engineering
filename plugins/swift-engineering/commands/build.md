@@ -29,7 +29,22 @@ Build the project and resolve any compiler errors or warnings.
 
 ## Workflow
 
-### 1. Execute Build
+### 1. IMMEDIATELY Invoke Build Agent
+
+After understanding the build request, your VERY NEXT ACTION must be to invoke the builder agent:
+
+```
+Task(
+  subagent_type: "swift-engineering:swift-builder",
+  description: "Build project and verify",
+  prompt: "Build the project and report any errors or warnings. [Include any specific instructions like --fix if provided]"
+)
+```
+
+⛔ **DO NOT** call `EnterPlanMode`. The agent IS the build mechanism.
+⛔ **DO NOT** use Bash to run xcodebuild yourself.
+
+### 2. Execute Build
 
 ```
 @swift-builder
@@ -37,7 +52,7 @@ Build the project and resolve any compiler errors or warnings.
 
 **WHY:** Uses Haiku for efficient mechanical work. Runs xcodebuild with the appropriate scheme and simulator, parses errors/warnings, and can attempt fixes.
 
-### 2. Handle Results
+### 3. Handle Results
 
 #### On Build Failure
 
@@ -81,7 +96,7 @@ Only fixes warnings you approve.
 
 > "✓ Build successful. No errors or warnings."
 
-### 3. Completion
+### 4. Completion
 
 Summarize build status:
 > "✓ **Build complete**

@@ -69,7 +69,46 @@ Then ask about UI:
 > - Describe the UI visually
 > - Say 'skip' to proceed without UI design analysis"
 
-### 2. UI Analysis (if UI provided)
+Once you have a description:
+
+1. **Analyze the description** and suggest:
+   - Feature name (e.g., `UserProfile`)
+   - Likely files to create
+   - Architecture recommendation (TCA vs vanilla Swift) with rationale
+   - Persistence needs (SQLite, UserDefaults, CloudKit, or none)
+   - New dependencies needed
+
+2. **Present suggestions and ask for feedback**
+
+3. **Ask clarifying questions** if needed
+
+### 2. IMMEDIATELY Invoke Planning Agent
+
+After gathering requirements, your VERY NEXT ACTION must be to invoke an agent:
+
+**If UI mockup/description provided:**
+```
+Task(
+  subagent_type: "swift-engineering:swift-ui-design",
+  description: "Analyze UI for [feature-name]",
+  prompt: "Analyze the provided UI [mockup/description]. [Include all gathered requirements]"
+)
+```
+
+**Otherwise:**
+```
+Task(
+  subagent_type: "swift-engineering:swift-architect",
+  description: "Plan [feature-name] architecture",
+  prompt: "Design architecture for [feature description]. [Include all requirements]"
+)
+```
+
+⛔ **DO NOT** call `EnterPlanMode`. The agent IS the planning mechanism.
+⛔ **DO NOT** use Read, Grep, or Glob tools to explore the codebase yourself.
+⛔ **DO NOT** start implementing. This command is for planning ONLY.
+
+### 3. UI Analysis (if UI provided)
 
 ```
 @swift-ui-design
@@ -79,7 +118,7 @@ Then ask about UI:
 
 **BOUNDARY:** Hand off to @swift-architect when UI Design Analysis is complete.
 
-### 3. Architecture Planning
+### 4. Architecture Planning
 
 ```
 @swift-architect
@@ -93,7 +132,7 @@ Then ask about UI:
 
 **BOUNDARY:** Hand off to @tca-architect if TCA, otherwise complete.
 
-### 4. TCA Architecture (if TCA chosen)
+### 5. TCA Architecture (if TCA chosen)
 
 ```
 @tca-architect
@@ -103,7 +142,7 @@ Then ask about UI:
 
 **BOUNDARY:** Planning complete when TCA Design section is written.
 
-### 5. Completion
+### 6. Completion
 
 Summarize the plan:
 > "✓ **Plan complete:** `UserProfile`

@@ -37,12 +37,30 @@ Ask if not specified:
 > 2. **Specific feature** — Name the feature or file
 > 3. **Create new tests** — For code without tests"
 
-### 2. Check for Existing Tests
+### 2. IMMEDIATELY Invoke Test Agent
 
-Search for existing test files:
-- `*Tests.swift` files in test directories
-- TCA TestStore tests for reducers
-- Swift Testing @Suite and @Test declarations
+After determining scope, your VERY NEXT ACTION must be to invoke the test creator agent:
+
+**If tests need to be created:**
+```
+Task(
+  subagent_type: "swift-engineering:swift-test-creator",
+  description: "Create tests for [feature-name]",
+  prompt: "Create comprehensive tests for [feature description]. [Include requirements]"
+)
+```
+
+**Otherwise, if only running tests:**
+```
+Task(
+  subagent_type: "swift-engineering:swift-builder",
+  description: "Run tests for [feature-name]",
+  prompt: "Run the test suite for [feature/scope]. Report results."
+)
+```
+
+⛔ **DO NOT** call `EnterPlanMode`. The agent IS the mechanism for testing.
+⛔ **DO NOT** use Read, Grep, or Glob tools to search for tests yourself.
 
 ### 3. Create Tests (if needed)
 

@@ -39,7 +39,22 @@ Ask if not specified:
 > 2. **Specific files** — Name the files or folders
 > 3. **Full feature** — Review an entire feature directory"
 
-### 2. Execute Review
+### 2. IMMEDIATELY Invoke Review Agent
+
+After determining scope, your VERY NEXT ACTION must be to invoke the code reviewer agent:
+
+```
+Task(
+  subagent_type: "swift-engineering:swift-code-reviewer",
+  description: "Review code for quality and issues",
+  prompt: "Review [scope description]. Check for code quality, security, performance, and HIG compliance."
+)
+```
+
+⛔ **DO NOT** call `EnterPlanMode`. The agent IS the review mechanism.
+⛔ **DO NOT** use Read, Grep, or Glob tools to review code yourself.
+
+### 3. Execute Review
 
 ```
 @swift-code-reviewer
@@ -53,7 +68,7 @@ Ask if not specified:
 - **Security:** Input validation, data protection, secure networking
 - **Swift Best Practices:** Modern patterns, deprecated API usage
 
-### 3. Review Report
+### 4. Review Report
 
 @swift-code-reviewer produces a structured report:
 
@@ -80,7 +95,7 @@ Ask if not specified:
 ✓ Error handling
 ```
 
-### 4. Handle Issues
+### 5. Handle Issues
 
 If issues found, ask:
 > "I found [N] issues. Would you like me to fix them?"
@@ -92,7 +107,7 @@ If yes, hand off to appropriate implementation agent:
 
 After fixes, re-run review to verify.
 
-### 5. Completion
+### 6. Completion
 
 Summarize review:
 > "✓ **Review complete**
