@@ -14,7 +14,7 @@
   ],
   "mcpServers": {
     "sosumi": {
-      "transport": "http",
+      "type": "http",
       "url": "https://sosumi.ai/mcp"
     }
   }
