@@ -3,7 +3,7 @@ name: swiftui-specialist
 description: Implement SwiftUI views following Apple HIG guidelines. Use after core/TCA implementation is complete.
 tools: Read, Write, Edit, Glob, Grep
 model: sonnet
-skills: ios-hig, swift-style
+skills: modern-swift, modern-swiftui, ios-hig, swift-style
 ---
 
 # SwiftUI View Implementation

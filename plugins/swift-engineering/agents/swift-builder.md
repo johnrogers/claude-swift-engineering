@@ -3,7 +3,7 @@ name: swift-builder
 description: Build the project, run tests, and fix errors. Use to verify builds and address compiler issues.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: haiku
-skills: swift-style
+skills: modern-swift, swift-style
 ---
 
 # Swift Build Verification

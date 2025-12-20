@@ -3,7 +3,7 @@ name: swift-documenter
 description: Generate and maintain documentation — project README, package READMEs, and inline code comments. Use after feature completion or for documentation updates.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
-skills: generating-swift-package-docs
+skills: modern-swift, generating-swift-package-docs
 ---
 
 # Swift Documentation

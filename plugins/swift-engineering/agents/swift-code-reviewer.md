@@ -3,7 +3,7 @@ name: swift-code-reviewer
 description: Review Swift/iOS code for quality, security, performance, and HIG compliance. Use after implementation, before testing.
 tools: Read, Glob, Grep, Bash
 model: sonnet
-skills: ios-hig, swift-style
+skills: modern-swift, modern-swiftui, ios-hig, swift-style
 ---
 
 # Swift Code Reviewer
