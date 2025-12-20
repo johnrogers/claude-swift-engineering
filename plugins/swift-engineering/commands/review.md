@@ -4,9 +4,16 @@ description: Review Swift code for quality, security, performance, and HIG compl
 
 # Swift Code Review
 
-Review Swift/iOS code for quality, security, performance, and HIG compliance.
+> ⛔ **DO NOT use Claude's built-in Plan mode**
+>
+> This command uses specialized agents:
+> - Planning: `@swift-architect`, `@tca-architect`
+> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+>
+> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
+> EnterPlanMode will break this workflow.
 
-**IMPORTANT:** Do NOT use Claude's built-in Plan mode. Always use the plugin agents specified below with @agent syntax.
+Review Swift/iOS code for quality, security, performance, and HIG compliance.
 
 ## Invocation
 
