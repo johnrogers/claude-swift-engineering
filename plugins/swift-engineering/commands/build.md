@@ -4,9 +4,16 @@ description: Build the project and check for errors/warnings
 
 # Swift Build Verification
 
-Build the project and resolve any compiler errors or warnings.
+> ⛔ **DO NOT use Claude's built-in Plan mode**
+>
+> This command uses specialized agents:
+> - Planning: `@swift-architect`, `@tca-architect`
+> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+>
+> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
+> EnterPlanMode will break this workflow.
 
-**IMPORTANT:** Do NOT use Claude's built-in Plan mode. Always use the plugin agents specified below with @agent syntax.
+Build the project and resolve any compiler errors or warnings.
 
 ## Invocation
 

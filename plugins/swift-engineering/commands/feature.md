@@ -4,9 +4,16 @@ description: Start a new Swift feature — plan, implement, test, and build. Use
 
 # Swift Feature Workflow
 
-Guide the user through developing a complete Swift feature using this plugin's specialized agents.
+> ⛔ **DO NOT use Claude's built-in Plan mode**
+>
+> This command uses specialized agents:
+> - Planning: `@swift-architect`, `@tca-architect`
+> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+>
+> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
+> EnterPlanMode will break this workflow.
 
-**IMPORTANT:** Do NOT use Claude's built-in Plan mode. Always use the plugin agents specified below with @agent syntax.
+Guide the user through developing a complete Swift feature using this plugin's specialized agents.
 
 ## Invocation
 
@@ -69,7 +76,31 @@ Once you have a description:
 
 3. **Ask clarifying questions** if needed
 
-### 2. Confirm Automation Preference
+### 2. IMMEDIATELY Invoke Planning Agent
+
+After gathering requirements, your VERY NEXT ACTION must be to invoke an agent:
+
+**If UI mockup/description provided:**
+```
+Task(
+  subagent_type: "swift-engineering:swift-ui-design",
+  description: "Analyze UI for [feature-name]",
+  prompt: "Analyze the provided UI [mockup/description]. [Include all gathered requirements]"
+)
+```
+
+**Otherwise:**
+```
+Task(
+  subagent_type: "swift-engineering:swift-architect",
+  description: "Plan [feature-name] architecture",
+  prompt: "Design architecture for [feature description]. [Include all requirements]"
+)
+```
+
+⛔ **DO NOT** call `EnterPlanMode`. The agent IS the planning mechanism.
+
+### 3. Confirm Automation Preference
 
 Ask the user:
 > "How would you like to proceed?
@@ -78,7 +109,7 @@ Ask the user:
 >
 > Which do you prefer?"
 
-### 3. Execute Workflow
+### 4. Execute Workflow
 
 Execute each phase by calling the specified agent. Each agent updates the plan file with handoff notes.
 
@@ -223,7 +254,7 @@ If yes:
 
 ---
 
-### 4. Completion
+### 5. Completion
 
 Summarize what was created:
 > "✓ **Feature complete:** `UserProfile`

@@ -4,9 +4,16 @@ description: Run tests for the current project or feature
 
 # Swift Testing
 
-Create and/or run tests for Swift features.
+> ⛔ **DO NOT use Claude's built-in Plan mode**
+>
+> This command uses specialized agents:
+> - Planning: `@swift-architect`, `@tca-architect`
+> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+>
+> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
+> EnterPlanMode will break this workflow.
 
-**IMPORTANT:** Do NOT use Claude's built-in Plan mode. Always use the plugin agents specified below with @agent syntax.
+Create and/or run tests for Swift features.
 
 ## Invocation
 

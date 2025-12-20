@@ -4,9 +4,16 @@ description: Migrate legacy Swift patterns to modern best practices — async/aw
 
 # Swift Modernization
 
-Migrate legacy Swift code to modern best practices.
+> ⛔ **DO NOT use Claude's built-in Plan mode**
+>
+> This command uses specialized agents:
+> - Planning: `@swift-architect`, `@tca-architect`
+> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+>
+> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
+> EnterPlanMode will break this workflow.
 
-**IMPORTANT:** Do NOT use Claude's built-in Plan mode. Always use the plugin agents specified below with @agent syntax.
+Migrate legacy Swift code to modern best practices.
 
 ## Invocation
 
