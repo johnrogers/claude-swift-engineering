@@ -9,6 +9,8 @@ description: Migrate legacy Swift patterns to modern best practices — async/aw
 > This command delegates to specialized agents:
 > - **@swift-modernizer** — Analyzes legacy code and migrates to modern Swift patterns
 > - **@swift-builder** — Verifies modernized code compiles and tests pass
+>
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Migrate legacy Swift code to modern best practices.
 

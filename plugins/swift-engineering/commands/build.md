@@ -12,6 +12,8 @@ description: Build the project and check for errors/warnings
 > - **@tca-engineer** — Fixes TCA-specific errors if needed
 > - **@swiftui-specialist** — Fixes SwiftUI view errors if needed
 > - **@swift-test-creator** — Fixes test errors if needed
+>
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Build the project and resolve any compiler errors or warnings.
 

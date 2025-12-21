@@ -10,6 +10,8 @@ description: Plan a Swift feature without implementing. Uses swift-architect age
 > - **@swift-ui-design** — Analyzes UI mockups/descriptions to inform architecture
 > - **@swift-architect** — Designs feature architecture and persistence strategy
 > - **@tca-architect** — Designs detailed TCA state/action/dependency structure (if TCA chosen)
+>
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Create an architecture plan for a Swift feature without implementing it.
 
@@ -66,19 +68,6 @@ Then ask about UI:
 > - Paste an image
 > - Describe the UI visually
 > - Say 'skip' to proceed without UI design analysis"
-
-Once you have a description:
-
-1. **Analyze the description** and suggest:
-   - Feature name (e.g., `UserProfile`)
-   - Likely files to create
-   - Architecture recommendation (TCA vs vanilla Swift) with rationale
-   - Persistence needs (SQLite, UserDefaults, CloudKit, or none)
-   - New dependencies needed
-
-2. **Present suggestions and ask for feedback**
-
-3. **Ask clarifying questions** if needed
 
 ### 2. Invoke Planning Agent
 

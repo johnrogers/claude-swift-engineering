@@ -11,6 +11,8 @@ description: Review Swift code for quality, security, performance, and HIG compl
 > - **@tca-engineer** — Fixes TCA-specific issues if needed
 > - **@swiftui-specialist** — Fixes SwiftUI view issues if needed
 > - **@swift-engineer** — Fixes general Swift issues if needed
+>
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Review Swift/iOS code for quality, security, performance, and HIG compliance.
 

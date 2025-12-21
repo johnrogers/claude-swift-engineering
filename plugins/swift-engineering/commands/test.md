@@ -12,6 +12,8 @@ description: Run tests for the current project or feature
 > - **@tca-engineer** — Fixes TCA test issues if needed
 > - **@swiftui-specialist** — Fixes SwiftUI test issues if needed
 > - **@swift-engineer** — Fixes general Swift test issues if needed
+>
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Create and/or run tests for Swift features.
 
