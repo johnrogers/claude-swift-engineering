@@ -4,14 +4,13 @@ description: Migrate legacy Swift patterns to modern best practices — async/aw
 
 # Swift Modernization
 
-> ⛔ **DO NOT use Claude's built-in Plan mode**
+> ⛔ **DO NOT use Claude's built-in Plan mode or direct tool usage**
 >
-> This command uses specialized agents:
-> - Planning: `@swift-architect`, `@tca-architect`
-> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+> This command delegates to specialized agents:
+> - **@swift-modernizer** — Analyzes legacy code and migrates to modern Swift patterns
+> - **@swift-builder** — Verifies modernized code compiles and tests pass
 >
-> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
-> EnterPlanMode will break this workflow.
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Migrate legacy Swift code to modern best practices.
 
@@ -40,13 +39,14 @@ Ask if not specified:
 > 2. **Specific pattern** — e.g., 'RxSwift to async/await', 'UIKit to SwiftUI'
 > 3. **Full audit** — Scan entire codebase for modernization opportunities"
 
-### 2. Analyze
+### 2. Invoke Modernization Agent
 
-```
-@swift-modernizer
-```
+After gathering scope, immediately delegate to **@swift-modernizer**.
 
-**WHY:** Expert in legacy patterns and modern replacements. Preserves functionality while updating to current Swift best practices. Uses `programming-swift` skill for language reference when needed.
+**WHY:** @swift-modernizer is expert in legacy patterns and modern replacements. Preserves functionality while updating to current Swift best practices. Uses `programming-swift` skill for language reference when needed.
+
+⛔ **DO NOT** call `EnterPlanMode`
+⛔ **DO NOT** use Read, Grep, or Glob tools to analyze code yourself
 
 ### 3. Migration Report
 
@@ -95,11 +95,9 @@ Ask:
 
 ### 5. Verify
 
-```
-@swift-builder
-```
+Delegate to **@swift-builder** to ensure modernized code compiles and tests pass.
 
-**WHY:** Ensure modernized code compiles and tests pass. Catch any issues introduced by migration.
+**WHY:** Catch any issues introduced by migration.
 
 ### 6. Completion
 

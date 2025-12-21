@@ -4,14 +4,15 @@ description: Review Swift code for quality, security, performance, and HIG compl
 
 # Swift Code Review
 
-> ⛔ **DO NOT use Claude's built-in Plan mode**
+> ⛔ **DO NOT use Claude's built-in Plan mode or direct tool usage**
 >
-> This command uses specialized agents:
-> - Planning: `@swift-architect`, `@tca-architect`
-> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+> This command delegates to specialized agents:
+> - **@swift-code-reviewer** — Reviews code for quality, security, performance, and HIG compliance
+> - **@tca-engineer** — Fixes TCA-specific issues if needed
+> - **@swiftui-specialist** — Fixes SwiftUI view issues if needed
+> - **@swift-engineer** — Fixes general Swift issues if needed
 >
-> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
-> EnterPlanMode will break this workflow.
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Review Swift/iOS code for quality, security, performance, and HIG compliance.
 
@@ -39,19 +40,20 @@ Ask if not specified:
 > 2. **Specific files** — Name the files or folders
 > 3. **Full feature** — Review an entire feature directory"
 
-### 2. Execute Review
+### 2. Invoke Review Agent
 
-```
-@swift-code-reviewer
-```
+After determining scope, immediately delegate to **@swift-code-reviewer**.
 
-**WHY:** Expert review catches issues before they reach production. Checks for:
+**WHY:** @swift-code-reviewer provides expert review and catches issues before they reach production. Checks for:
 - **Code Quality:** Structure, naming, complexity, duplication
 - **Concurrency Safety:** Actor isolation, Sendable conformance, data races
 - **HIG Compliance:** UI patterns, accessibility, platform conventions
 - **Performance:** Memory leaks, inefficient patterns, unnecessary work
 - **Security:** Input validation, data protection, secure networking
 - **Swift Best Practices:** Modern patterns, deprecated API usage
+
+⛔ **DO NOT** call `EnterPlanMode`
+⛔ **DO NOT** use Read, Grep, or Glob tools to review code yourself
 
 ### 3. Review Report
 
@@ -86,9 +88,9 @@ If issues found, ask:
 > "I found [N] issues. Would you like me to fix them?"
 
 If yes, hand off to appropriate implementation agent:
-- TCA issues → @tca-engineer
-- View issues → @swiftui-specialist
-- Other Swift → @swift-engineer
+- TCA issues → **@tca-engineer**
+- View issues → **@swiftui-specialist**
+- Other Swift → **@swift-engineer**
 
 After fixes, re-run review to verify.
 

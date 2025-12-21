@@ -4,14 +4,14 @@ description: Plan a Swift feature without implementing. Uses swift-architect age
 
 # Swift Planning Only
 
-> ⛔ **DO NOT use Claude's built-in Plan mode**
+> ⛔ **DO NOT use Claude's built-in Plan mode or direct tool usage**
 >
-> This command uses specialized agents:
-> - Planning: `@swift-architect`, `@tca-architect`
-> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+> This command delegates to specialized agents:
+> - **@swift-ui-design** — Analyzes UI mockups/descriptions to inform architecture
+> - **@swift-architect** — Designs feature architecture and persistence strategy
+> - **@tca-architect** — Designs detailed TCA state/action/dependency structure (if TCA chosen)
 >
-> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
-> EnterPlanMode will break this workflow.
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Create an architecture plan for a Swift feature without implementing it.
 
@@ -69,39 +69,37 @@ Then ask about UI:
 > - Describe the UI visually
 > - Say 'skip' to proceed without UI design analysis"
 
-### 2. UI Analysis (if UI provided)
+### 2. Invoke Planning Agent
 
-```
-@swift-ui-design
-```
+After gathering requirements, immediately delegate to the appropriate agent:
+
+**If UI mockup/description provided:** Delegate to **@swift-ui-design** first.
 
 **WHY:** UI requirements inform architecture decisions. Analyzing UI first helps identify state management needs and component complexity.
 
-**BOUNDARY:** Hand off to @swift-architect when UI Design Analysis is complete.
+**Otherwise:** Delegate to **@swift-architect** directly.
+
+⛔ **DO NOT** call `EnterPlanMode`
+⛔ **DO NOT** use Read, Grep, or Glob tools to explore the codebase yourself
+⛔ **DO NOT** start implementing. This command is for planning ONLY
 
 ### 3. Architecture Planning
 
-```
-@swift-architect
-```
+**@swift-ui-design** (if UI provided) hands off to **@swift-architect** when UI Design Analysis is complete.
 
-**WHY:** Architecture decisions (TCA vs vanilla, persistence strategy, feature boundaries) must be made before implementation.
+**@swift-architect** makes architecture decisions (TCA vs vanilla, persistence strategy, feature boundaries).
 
 **DECISION POINT:** Based on architecture choice:
-- If TCA → proceed to TCA design
+- If TCA → hand off to **@tca-architect**
 - If vanilla Swift → planning complete
-
-**BOUNDARY:** Hand off to @tca-architect if TCA, otherwise complete.
 
 ### 4. TCA Architecture (if TCA chosen)
 
-```
-@tca-architect
-```
+**@tca-architect** designs detailed TCA state/action/dependency structure.
 
 **WHY:** TCA feature design requires specialized knowledge. Detailed state/action/dependency design prevents implementation confusion.
 
-**BOUNDARY:** Planning complete when TCA Design section is written.
+Planning is complete when TCA Design section is written.
 
 ### 5. Completion
 

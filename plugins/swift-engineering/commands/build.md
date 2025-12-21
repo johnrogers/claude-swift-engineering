@@ -4,14 +4,16 @@ description: Build the project and check for errors/warnings
 
 # Swift Build Verification
 
-> ⛔ **DO NOT use Claude's built-in Plan mode**
+> ⛔ **DO NOT use Claude's built-in Plan mode or direct tool usage**
 >
-> This command uses specialized agents:
-> - Planning: `@swift-architect`, `@tca-architect`
-> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
+> This command delegates to specialized agents:
+> - **@swift-builder** — Builds the project and handles errors/warnings
+> - **@swift-engineer** — Fixes general Swift errors if needed
+> - **@tca-engineer** — Fixes TCA-specific errors if needed
+> - **@swiftui-specialist** — Fixes SwiftUI view errors if needed
+> - **@swift-test-creator** — Fixes test errors if needed
 >
-> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
-> EnterPlanMode will break this workflow.
+> <!-- MAINTENANCE: Keep this agent list in sync with available agents in plugin.yaml -->
 
 Build the project and resolve any compiler errors or warnings.
 
@@ -29,13 +31,14 @@ Build the project and resolve any compiler errors or warnings.
 
 ## Workflow
 
-### 1. Execute Build
+### 1. Invoke Build Agent
 
-```
-@swift-builder
-```
+After understanding the build request, immediately delegate to **@swift-builder**.
 
-**WHY:** Uses Haiku for efficient mechanical work. Runs xcodebuild with the appropriate scheme and simulator, parses errors/warnings, and can attempt fixes.
+**WHY:** @swift-builder uses Haiku for efficient mechanical work. Runs xcodebuild with the appropriate scheme and simulator, parses errors/warnings, and can attempt fixes.
+
+⛔ **DO NOT** call `EnterPlanMode`
+⛔ **DO NOT** use Bash to run xcodebuild yourself
 
 ### 2. Handle Results
 
@@ -52,10 +55,10 @@ If "Automatically fix":
 - Attempts to fix each error
 - Rebuilds after fixes
 - Hands off to specialist if needed after 3 attempts:
-  - TCA errors → @tca-engineer
-  - View errors → @swiftui-specialist
-  - Test errors → @swift-test-creator
-  - Other errors → @swift-engineer
+  - TCA errors → **@tca-engineer**
+  - View errors → **@swiftui-specialist**
+  - Test errors → **@swift-test-creator**
+  - Other errors → **@swift-engineer**
 
 If "Just show me":
 - Displays condensed error summary:
