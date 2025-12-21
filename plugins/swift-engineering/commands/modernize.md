@@ -4,14 +4,11 @@ description: Migrate legacy Swift patterns to modern best practices — async/aw
 
 # Swift Modernization
 
-> ⛔ **DO NOT use Claude's built-in Plan mode**
+> ⛔ **DO NOT use Claude's built-in Plan mode or direct tool usage**
 >
-> This command uses specialized agents:
-> - Planning: `@swift-architect`, `@tca-architect`
-> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
->
-> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
-> EnterPlanMode will break this workflow.
+> This command delegates to specialized agents:
+> - **@swift-modernizer** — Analyzes legacy code and migrates to modern Swift patterns
+> - **@swift-builder** — Verifies modernized code compiles and tests pass
 
 Migrate legacy Swift code to modern best practices.
 
@@ -40,30 +37,16 @@ Ask if not specified:
 > 2. **Specific pattern** — e.g., 'RxSwift to async/await', 'UIKit to SwiftUI'
 > 3. **Full audit** — Scan entire codebase for modernization opportunities"
 
-### 2. IMMEDIATELY Invoke Modernization Agent
+### 2. Invoke Modernization Agent
 
-After gathering scope, your VERY NEXT ACTION must be to invoke the modernizer agent:
+After gathering scope, immediately delegate to **@swift-modernizer**.
 
-```
-Task(
-  subagent_type: "swift-engineering:swift-modernizer",
-  description: "Analyze code for modernization",
-  prompt: "Analyze [scope] for modernization opportunities. [Include specific pattern if provided]"
-)
-```
+**WHY:** @swift-modernizer is expert in legacy patterns and modern replacements. Preserves functionality while updating to current Swift best practices. Uses `programming-swift` skill for language reference when needed.
 
-⛔ **DO NOT** call `EnterPlanMode`. The agent IS the modernization mechanism.
-⛔ **DO NOT** use Read, Grep, or Glob tools to analyze code yourself.
+⛔ **DO NOT** call `EnterPlanMode`
+⛔ **DO NOT** use Read, Grep, or Glob tools to analyze code yourself
 
-### 3. Analyze
-
-```
-@swift-modernizer
-```
-
-**WHY:** Expert in legacy patterns and modern replacements. Preserves functionality while updating to current Swift best practices. Uses `programming-swift` skill for language reference when needed.
-
-### 4. Migration Report
+### 3. Migration Report
 
 @swift-modernizer produces an analysis:
 
@@ -94,7 +77,7 @@ Task(
 2. `UIDevice.current.userInterfaceIdiom` → Environment check
 ```
 
-### 5. Execute Migration
+### 4. Execute Migration
 
 Ask:
 > "Which migrations would you like to proceed with?
@@ -108,15 +91,13 @@ Ask:
 - Maintain backward compatibility where needed
 - Create clear git commits
 
-### 6. Verify
+### 5. Verify
 
-```
-@swift-builder
-```
+Delegate to **@swift-builder** to ensure modernized code compiles and tests pass.
 
-**WHY:** Ensure modernized code compiles and tests pass. Catch any issues introduced by migration.
+**WHY:** Catch any issues introduced by migration.
 
-### 7. Completion
+### 6. Completion
 
 Summarize results:
 > "✓ **Modernization complete**

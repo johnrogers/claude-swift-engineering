@@ -4,14 +4,14 @@ description: Build the project and check for errors/warnings
 
 # Swift Build Verification
 
-> ⛔ **DO NOT use Claude's built-in Plan mode**
+> ⛔ **DO NOT use Claude's built-in Plan mode or direct tool usage**
 >
-> This command uses specialized agents:
-> - Planning: `@swift-architect`, `@tca-architect`
-> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
->
-> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
-> EnterPlanMode will break this workflow.
+> This command delegates to specialized agents:
+> - **@swift-builder** — Builds the project and handles errors/warnings
+> - **@swift-engineer** — Fixes general Swift errors if needed
+> - **@tca-engineer** — Fixes TCA-specific errors if needed
+> - **@swiftui-specialist** — Fixes SwiftUI view errors if needed
+> - **@swift-test-creator** — Fixes test errors if needed
 
 Build the project and resolve any compiler errors or warnings.
 
@@ -29,30 +29,16 @@ Build the project and resolve any compiler errors or warnings.
 
 ## Workflow
 
-### 1. IMMEDIATELY Invoke Build Agent
+### 1. Invoke Build Agent
 
-After understanding the build request, your VERY NEXT ACTION must be to invoke the builder agent:
+After understanding the build request, immediately delegate to **@swift-builder**.
 
-```
-Task(
-  subagent_type: "swift-engineering:swift-builder",
-  description: "Build project and verify",
-  prompt: "Build the project and report any errors or warnings. [Include any specific instructions like --fix if provided]"
-)
-```
+**WHY:** @swift-builder uses Haiku for efficient mechanical work. Runs xcodebuild with the appropriate scheme and simulator, parses errors/warnings, and can attempt fixes.
 
-⛔ **DO NOT** call `EnterPlanMode`. The agent IS the build mechanism.
-⛔ **DO NOT** use Bash to run xcodebuild yourself.
+⛔ **DO NOT** call `EnterPlanMode`
+⛔ **DO NOT** use Bash to run xcodebuild yourself
 
-### 2. Execute Build
-
-```
-@swift-builder
-```
-
-**WHY:** Uses Haiku for efficient mechanical work. Runs xcodebuild with the appropriate scheme and simulator, parses errors/warnings, and can attempt fixes.
-
-### 3. Handle Results
+### 2. Handle Results
 
 #### On Build Failure
 
@@ -67,10 +53,10 @@ If "Automatically fix":
 - Attempts to fix each error
 - Rebuilds after fixes
 - Hands off to specialist if needed after 3 attempts:
-  - TCA errors → @tca-engineer
-  - View errors → @swiftui-specialist
-  - Test errors → @swift-test-creator
-  - Other errors → @swift-engineer
+  - TCA errors → **@tca-engineer**
+  - View errors → **@swiftui-specialist**
+  - Test errors → **@swift-test-creator**
+  - Other errors → **@swift-engineer**
 
 If "Just show me":
 - Displays condensed error summary:
@@ -96,7 +82,7 @@ Only fixes warnings you approve.
 
 > "✓ Build successful. No errors or warnings."
 
-### 4. Completion
+### 3. Completion
 
 Summarize build status:
 > "✓ **Build complete**

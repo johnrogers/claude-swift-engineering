@@ -4,14 +4,13 @@ description: Review Swift code for quality, security, performance, and HIG compl
 
 # Swift Code Review
 
-> ⛔ **DO NOT use Claude's built-in Plan mode**
+> ⛔ **DO NOT use Claude's built-in Plan mode or direct tool usage**
 >
-> This command uses specialized agents:
-> - Planning: `@swift-architect`, `@tca-architect`
-> - Implementation: `@swift-engineer`, `@tca-engineer`, `@swiftui-specialist`
->
-> Call agents via `Task(subagent_type: "swift-engineering:agent-name", ...)`.
-> EnterPlanMode will break this workflow.
+> This command delegates to specialized agents:
+> - **@swift-code-reviewer** — Reviews code for quality, security, performance, and HIG compliance
+> - **@tca-engineer** — Fixes TCA-specific issues if needed
+> - **@swiftui-specialist** — Fixes SwiftUI view issues if needed
+> - **@swift-engineer** — Fixes general Swift issues if needed
 
 Review Swift/iOS code for quality, security, performance, and HIG compliance.
 
@@ -39,28 +38,11 @@ Ask if not specified:
 > 2. **Specific files** — Name the files or folders
 > 3. **Full feature** — Review an entire feature directory"
 
-### 2. IMMEDIATELY Invoke Review Agent
+### 2. Invoke Review Agent
 
-After determining scope, your VERY NEXT ACTION must be to invoke the code reviewer agent:
+After determining scope, immediately delegate to **@swift-code-reviewer**.
 
-```
-Task(
-  subagent_type: "swift-engineering:swift-code-reviewer",
-  description: "Review code for quality and issues",
-  prompt: "Review [scope description]. Check for code quality, security, performance, and HIG compliance."
-)
-```
-
-⛔ **DO NOT** call `EnterPlanMode`. The agent IS the review mechanism.
-⛔ **DO NOT** use Read, Grep, or Glob tools to review code yourself.
-
-### 3. Execute Review
-
-```
-@swift-code-reviewer
-```
-
-**WHY:** Expert review catches issues before they reach production. Checks for:
+**WHY:** @swift-code-reviewer provides expert review and catches issues before they reach production. Checks for:
 - **Code Quality:** Structure, naming, complexity, duplication
 - **Concurrency Safety:** Actor isolation, Sendable conformance, data races
 - **HIG Compliance:** UI patterns, accessibility, platform conventions
@@ -68,7 +50,10 @@ Task(
 - **Security:** Input validation, data protection, secure networking
 - **Swift Best Practices:** Modern patterns, deprecated API usage
 
-### 4. Review Report
+⛔ **DO NOT** call `EnterPlanMode`
+⛔ **DO NOT** use Read, Grep, or Glob tools to review code yourself
+
+### 3. Review Report
 
 @swift-code-reviewer produces a structured report:
 
@@ -95,19 +80,19 @@ Task(
 ✓ Error handling
 ```
 
-### 5. Handle Issues
+### 4. Handle Issues
 
 If issues found, ask:
 > "I found [N] issues. Would you like me to fix them?"
 
 If yes, hand off to appropriate implementation agent:
-- TCA issues → @tca-engineer
-- View issues → @swiftui-specialist
-- Other Swift → @swift-engineer
+- TCA issues → **@tca-engineer**
+- View issues → **@swiftui-specialist**
+- Other Swift → **@swift-engineer**
 
 After fixes, re-run review to verify.
 
-### 6. Completion
+### 5. Completion
 
 Summarize review:
 > "✓ **Review complete**
