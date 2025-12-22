@@ -39,7 +39,6 @@ Your role is architecture design ONLY. Focus on TCA patterns, state design, and 
 - Design Action taxonomy:
   - `view` actions (UI-triggered)
   - `delegate` actions (parent communication)
-  - `internal` actions (internal state changes)
   - Child feature actions
 - Identify @DependencyClient needs:
   - What external services are required

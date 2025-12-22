@@ -17,9 +17,14 @@ public struct FeatureNameReducer {
     }
 
     public enum Action: ViewAction {
-        // Actions organized by boundary
+        // Actions that are called from this reducer's view, and this reducer's view only.
+        enum View {
+            case onAppear
+        }
         case view(View)
+        // Actions that this reducer can use to delegate to other reducers.
         case delegate(Delegate)
+        // Actions that can be triggered from other reducers.
         case interface(Interface)
         // Internal actions
     }

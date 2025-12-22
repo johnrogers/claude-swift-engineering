@@ -8,8 +8,7 @@ Modern Swift/SwiftUI development toolkit with TCA support for Claude Code.
 
 - [Features](#features)
 - [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
-- [Commands](#commands)
+- [Using Agents](#using-agents)
 - [Agents](#agents)
 - [Skills](#skills)
 - [Advanced Features](#advanced-features)
@@ -34,36 +33,109 @@ Modern Swift/SwiftUI development toolkit with TCA support for Claude Code.
 
 **Sosumi MCP Server** — Required for Apple documentation lookup. Agents use this to verify modern API usage (2025). Configure in your Claude Code settings before using this plugin.
 
-## Quick Start
+## Using Agents
 
-### Run Your First Feature
+This plugin provides ultra-specialized agents that you invoke directly to build features. Each agent has a specific role and understands when to hand off to the next agent in the workflow.
 
-Try building a complete feature with TCA:
+### Basic Workflow: Building a TCA Feature
 
-```bash
-/feature Build a counter with increment/decrement buttons using TCA
+For a typical feature using The Composable Architecture:
+
+**Step 1: Plan the architecture**
+```
+@swift-architect Design a counter feature with increment/decrement buttons using TCA
+```
+This creates a plan file at `docs/plans/counter.md` with architecture decisions.
+
+**Step 2: Design TCA architecture**
+```
+@tca-architect Design the state, actions, and effects for the counter based on the plan
+```
+Updates the plan with TCA-specific design details.
+
+**Step 3: Implement the reducer**
+```
+@tca-engineer Implement the counter reducer and effects following the TCA design
+```
+Creates the actual Reducer implementation.
+
+**Step 4: Create SwiftUI views**
+```
+@swiftui-specialist Create the counter view that displays the state and handles actions
+```
+Implements the UI without mixing in business logic.
+
+**Step 5: Write tests**
+```
+@swift-test-creator Write comprehensive tests for the counter using Swift Testing
+```
+Creates test files with test cases.
+
+**Step 6: Verify build**
+```
+@swift-builder Build the project and verify everything compiles without errors
+```
+Ensures the code is production-ready.
+
+### Alternative Workflow: Vanilla Swift Feature (No TCA)
+
+For simpler features without complex state management:
+
+**Step 1: Plan architecture**
+```
+@swift-architect Design a calculator utility (vanilla Swift, no UI)
 ```
 
-The plugin will automatically:
-1. Analyze requirements and design TCA architecture (`@swift-architect`, `@tca-architect`)
-2. Implement reducer, state, actions, and effects (`@tca-engineer`)
-3. Create SwiftUI views (`@swiftui-specialist`)
-4. Write tests (`@swift-test-creator`)
-5. Verify build (`@swift-builder`)
-6. Generate documentation (`@swift-documenter`, optional)
+**Step 2: Implement core logic**
+```
+@swift-engineer Implement the calculator logic following the plan
+```
 
-See [Workflow](#workflow) and [Agent Handoff Model](#agent-handoff-model) for detailed process.
+**Step 3: Write tests**
+```
+@swift-test-creator Write tests for the calculator using Swift Testing
+```
 
-## Commands
+**Step 4: Verify build**
+```
+@swift-builder Build and verify
+```
 
-| Command | Description |
-|---------|-------------|
-| `/feature` | Full feature workflow — plan, implement, test, build |
-| `/plan` | Plan without implementing |
-| `/test` | Create and run tests |
-| `/build` | Build and check errors |
-| `/review` | Code review for quality, security, performance |
-| `/modernize` | Migrate legacy patterns to modern Swift |
+### Common Tasks by Agent
+
+| Task | Agent | Example |
+|------|-------|---------|
+| Analyze UI mockups/screenshots | `@swift-ui-design` | Analyze this design mockup and create UI specifications |
+| Plan new features | `@swift-architect` | Plan a user authentication system |
+| Design TCA architecture | `@tca-architect` | Design state/actions/effects for authentication |
+| Implement TCA features | `@tca-engineer` | Implement the authentication reducer |
+| Implement vanilla Swift | `@swift-engineer` | Implement the Settings model and persistence |
+| Build SwiftUI views | `@swiftui-specialist` | Create the authentication UI following the design |
+| Create tests | `@swift-test-creator` | Write tests for the authentication flow |
+| Code review | `@swift-code-reviewer` | Review the authentication module for security and quality |
+| Modernize code | `@swift-modernizer` | Migrate this legacy code to async/await |
+| Documentation | `@swift-documenter` | Document the public API surface |
+| Project docs | `@documentation-generator` | Create comprehensive project documentation |
+| Fast code search | `@search` | Find all UserDefaults usage in the codebase |
+| Build verification | `@swift-builder` | Build the project and fix any errors |
+
+### Plan File Coordination
+
+All agents coordinate through a shared plan file at `docs/plans/<feature-name>.md`. This file:
+- Records architecture decisions (created by `@swift-architect`)
+- Tracks implementation status
+- Contains handoff notes from each agent to the next
+- Ensures continuity across agent handoffs
+
+Each agent will automatically read the plan, update it with their work, and add notes for the next agent.
+
+### Key Principles
+
+- **Start with `@swift-architect`** for new features to get architecture decisions
+- **Use `@swift-ui-design`** if you have mockups or screenshots to analyze
+- **Choose your path** — TCA for complex state, vanilla Swift for simpler features
+- **Always end with `@swift-builder`** to verify the project compiles
+- **Agents coordinate via plan files** — No manual handoff needed, just invoke the next agent
 
 ## Agents
 
@@ -298,38 +370,6 @@ All agents share state via a plan file at `docs/plans/<feature-name>.md`:
 
 ## Quality Assurance
 
-### Smoke Test Suite
-
-The plugin includes a comprehensive smoke test suite to validate agent configuration and catch common errors.
-
-**Automated Tests:**
-
-- **Agent Metadata Validation** — Ensures all agents have required fields (name, description, color, tools, model)
-- **Model Assignment Verification** — Confirms agents are assigned correct models (Opus/Sonnet/Haiku)
-- **Read-Only Agent Constraints** — Validates planning agents cannot modify files
-- **Handoff Chain Completeness** — Verifies no agents are orphaned or unreachable
-- **Skill Reference Validation** — Ensures all agent references to skills point to valid files
-
-**Manual Integration Tests:**
-
-- Full feature workflow with TCA (UI → architecture → implementation → testing)
-- Full feature workflow with Vanilla Swift
-- Planning agent read-only enforcement (cannot create/modify implementation files)
-- Error triage and handoff (build failures route to `@swift-builder`)
-- Context budget compliance (agents respect token limits)
-
-### Running Tests
-
-See [docs/smoke-tests.md](docs/smoke-tests.md) for complete test suite documentation and CI integration instructions.
-
-Quick validation:
-
-```bash
-cd plugins/swift-engineering
-# Run basic validation
-cat docs/smoke-tests.md
-```
-
 ### Validation Checklist
 
 When modifying agents or skills:
@@ -340,4 +380,3 @@ When modifying agents or skills:
 - [ ] Planning agents have explicit no-modify constraints
 - [ ] All handoffs are documented in Agent Handoff Model
 - [ ] All skill references exist in `skills/` directory
-- [ ] Smoke tests pass before committing changes
