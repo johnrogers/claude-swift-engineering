@@ -40,5 +40,14 @@ NEW_VERSION="$MAJOR.$MINOR.$PATCH"
 jq --arg version "$NEW_VERSION" '.version = $version' "$PLUGIN_FILE" > "$PLUGIN_FILE.tmp"
 mv "$PLUGIN_FILE.tmp" "$PLUGIN_FILE"
 
+# Update plugin README with new version
+PLUGIN_README="$SCRIPT_DIR/../README.md"
+
+if [ -f "$PLUGIN_README" ]; then
+  sed -i.bak -E "s/\*\*Version:\*\* [0-9]+\.[0-9]+\.[0-9]+/**Version:** ${NEW_VERSION}/g" "$PLUGIN_README"
+  rm -f "$PLUGIN_README.bak"
+  echo "Updated plugin README to version $NEW_VERSION"
+fi
+
 echo "Bumped version from $CURRENT_VERSION to $NEW_VERSION"
 exit 0

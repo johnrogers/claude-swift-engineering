@@ -1,6 +1,6 @@
 # claude-swift-engineering
 
-[![Version](https://img.shields.io/badge/version-0.1.7-blue)](#) [![License](https://img.shields.io/badge/license-MIT-green)](#) [![Platform](https://img.shields.io/badge/platform-iOS%2026%2B%20%7C%20macOS-blue)](#)
+[![License](https://img.shields.io/badge/license-MIT-green)](#) [![Platform](https://img.shields.io/badge/platform-iOS%2026%2B%20%7C%20macOS-blue)](#)
 
 > Claude Code plugin marketplace for modern Swift/SwiftUI development
 
@@ -8,7 +8,7 @@ A specialized AI toolkit for building professional iOS/macOS features with moder
 
 ## Swift Engineering Plugin
 
-The **swift-engineering plugin** (v0.1.7) is a production-ready toolkit for professional Swift development:
+The **swift-engineering plugin** is a production-ready toolkit for professional Swift development:
 
 - **13 Ultra-Specialized Agents** — Planning (Opus), implementation (Sonnet), mechanical tasks (Haiku) with clear handoffs
 - **TCA Support** — Full workflow from architecture design to testing for The Composable Architecture
@@ -61,7 +61,7 @@ claude-swift-engineering/
 │   └── marketplace.json                    # Marketplace configuration
 ├── .github/workflows/                      # CI/CD pipelines
 ├── plugins/
-│   └── swift-engineering/                  # Main plugin (v0.1.7)
+│   └── swift-engineering/                  # Main plugin
 │       ├── agents/                         # 13 specialized agents
 │       ├── skills/                         # 11 knowledge skills
 │       ├── hooks-scripts/                  # Hooks system
@@ -121,7 +121,6 @@ MIT License — See [LICENSE](LICENSE) file for details.
 
 **Author:** John Rogers
 **Repository:** claude-swift-engineering
-**Plugin Version:** 0.1.7
 **Swift Version:** 6.2+
 **iOS Deployment Target:** 26.0+
 
