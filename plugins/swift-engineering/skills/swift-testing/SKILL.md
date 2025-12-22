@@ -1,6 +1,6 @@
 ---
 name: swift-testing
-description: Swift Testing framework patterns and best practices. Use when writing tests with Swift Testing (@Test, #expect, #require), migrating from XCTest, or implementing async tests, parameterized tests, or TCA TestStore patterns.
+description: Swift Testing framework patterns and best practices. Use when writing tests with Swift Testing (@Test, #expect, #require), migrating from XCTest, or implementing async tests and parameterized tests.
 ---
 
 # Swift Testing Framework

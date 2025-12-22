@@ -22,7 +22,7 @@ Guide the user through developing a complete Swift feature using this plugin's s
 
 ## Plan File Format
 
-All agents share state via a plan file at `docs/plans/<feature-name>.md`:
+All agents share state via a plan file at `docs/plans/<feature-name>.md`. If it does not exist, create it:
 
 ```markdown
 # Feature: <FeatureName>
@@ -65,6 +65,8 @@ Then ask about UI input:
 
 Once you have a description:
 
+- Strongly consider consulting either @swift-architect, @tca-architect, or @swift-ui-design to battle-test the plan.
+
 1. **Analyze the description** and suggest:
    - Feature name (e.g., `UserProfile`)
    - Likely files to create
@@ -82,20 +84,13 @@ After gathering requirements, your VERY NEXT ACTION must be to invoke an agent:
 
 **If UI mockup/description provided:**
 ```
-Task(
-  subagent_type: "swift-engineering:swift-ui-design",
-  description: "Analyze UI for [feature-name]",
-  prompt: "Analyze the provided UI [mockup/description]. [Include all gathered requirements]"
-)
+@swift-ui-design
 ```
+Pass the screenshot/description. Output: UI Design Analysis section in plan.
 
 **Otherwise:**
 ```
-Task(
-  subagent_type: "swift-engineering:swift-architect",
-  description: "Plan [feature-name] architecture",
-  prompt: "Design architecture for [feature description]. [Include all requirements]"
-)
+@swift-planner
 ```
 
 ⛔ **DO NOT** call `EnterPlanMode`. The agent IS the planning mechanism.

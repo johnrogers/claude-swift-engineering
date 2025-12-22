@@ -1,6 +1,6 @@
 ---
 name: composable-architecture
-description: Comprehensive guide for The Composable Architecture (TCA) patterns in Swift. Use when building features with TCA, structuring reducers, managing state, handling effects, navigation, or testing. Triggers: TCA, composable architecture, reducer, feature, state management, SwiftUI architecture.
+description: Use when building features with TCA (The Composable Architecture), structuring reducers, managing state, handling effects, navigation, or testing TCA features. Triggers: @Reducer, Store, Effect, TestStore, reducer composition, TCA patterns.
 ---
 
 # The Composable Architecture (TCA)

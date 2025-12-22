@@ -1,6 +1,6 @@
 ---
 name: ios-hig
-description: Apple Human Interface Guidelines for iOS app design with SwiftUI. Use when designing iOS interfaces, working with SwiftUI views, handling user interaction, managing accessibility, choosing colors and typography, implementing navigation, providing feedback, optimizing performance, or requesting permissions. Triggers: SwiftUI, iOS design, accessibility, Dynamic Type, VoiceOver, navigation, modals, empty states, loading states, animations, haptics, permissions, SF Symbols, system components.
+description: Use when designing iOS interfaces, handling user interaction, managing accessibility (VoiceOver, Dynamic Type), choosing colors/typography, implementing navigation, providing feedback (animations, haptics), or requesting permissions. Apple Human Interface Guidelines for iOS.
 ---
 
 # iOS Human Interface Guidelines
