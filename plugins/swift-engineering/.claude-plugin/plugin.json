@@ -1,6 +1,6 @@
 {
   "name": "swift-engineering",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Modern Swift/SwiftUI development toolkit with TCA support. Provides agents for planning, implementing, testing, documenting, and building Swift features.",
   "keywords": [
     "swift",
