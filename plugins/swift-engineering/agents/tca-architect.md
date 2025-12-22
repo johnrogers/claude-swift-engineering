@@ -3,6 +3,7 @@ name: tca-architect
 description: Design TCA (The Composable Architecture) feature architectures — state, actions, dependencies, navigation. Use when the plan specifies TCA and detailed architecture design is needed.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: opus
+color: orange
 skills: modern-swift, swift-common-patterns, composable-architecture
 ---
 

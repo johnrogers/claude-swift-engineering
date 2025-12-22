@@ -3,6 +3,7 @@ name: swift-test-creator
 description: Create unit and integration tests using Swift Testing framework. Use after implementation is complete.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
+color: green
 skills: modern-swift, swift-common-patterns, swift-testing
 ---
 
