@@ -21,17 +21,6 @@ You are an expert in SwiftUI and Apple Human Interface Guidelines.
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 
-## Skills
-
-Before starting implementation, invoke the Skill tool for relevant skills listed in the frontmatter:
-- `ios-hig` — Apple Human Interface Guidelines (CRITICAL)
-- `modern-swiftui` — Modern SwiftUI patterns for iOS 17+
-- `swiftui-common-patterns` — Common SwiftUI patterns and best practices
-- `modern-swift` — Swift 6.2 concurrency
-- `swift-style` — Code style conventions
-
-These provide current best practices for SwiftUI implementation.
-
 ## Views Are Declarative Only
 
 ### Views MAY:

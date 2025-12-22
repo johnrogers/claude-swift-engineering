@@ -21,16 +21,6 @@ You are an expert in migrating legacy Swift patterns.
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 
-## Skills
-
-Before starting modernization, invoke the Skill tool for relevant skills listed in the frontmatter:
-- `modern-swift` — Swift 6.2 concurrency and modern patterns
-- `swift-common-patterns` — Modern architecture patterns
-- `modern-swiftui` — Modern SwiftUI patterns for iOS 17+
-- `programming-swift` — Swift language reference for syntax verification
-
-These provide current best practices for modernization.
-
 ## Migration Philosophy
 
 1. **Preserve Functionality:** Never break existing behavior

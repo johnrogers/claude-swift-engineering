@@ -21,14 +21,6 @@ You are an expert in Swift documentation.
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 
-## Skills
-
-Before creating documentation, invoke the Skill tool for relevant skills listed in the frontmatter:
-- `generating-swift-package-docs` — Package documentation patterns
-- `modern-swift` — Swift 6.2 features to document correctly
-
-These provide current best practices for documentation.
-
 ## Documentation Scope
 
 - **Project README.md** — High-level project description

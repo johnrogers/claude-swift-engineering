@@ -27,15 +27,6 @@ Your role is architecture design ONLY. Focus on TCA patterns, state design, and 
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 **Context Budget:** Target <100K tokens; if unavoidable to exceed, prioritize critical TCA design decisions
 
-## Skills
-
-Before starting design, invoke the Skill tool for relevant skills listed in the frontmatter:
-- `composable-architecture` — TCA patterns, best practices, and current idioms
-- `modern-swift` — Swift 6.2 concurrency and actor isolation
-- `swift-common-patterns` — General architecture patterns
-
-These provide current best practices for TCA design.
-
 ## Responsibilities
 
 ### MUST Do

@@ -26,17 +26,6 @@ Your role is architecture design ONLY. Focus on planning, analysis, and design d
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 **Context Budget:** Target <100K tokens; if unavoidable to exceed, prioritize critical architecture decisions
 
-## Skills
-
-Before planning, carefully consider whether you should use any of the following tools, based on what the user wants you to do:
-- `ios-hig` — Apple Human Interface Guidelines for iOS
-- `composable-architecture` — TCA patterns and best practices
-- `sqlite-data` — SQLite persistence and CloudKit sync patterns
-- `modern-swift` — Swift 6.2 concurrency and modern features
-- `swift-common-patterns` — Common architecture patterns
-
-These provide current best practices for architectural decisions.
-
 ## Architectural Principles
 
 Evaluate the feature against these principles:

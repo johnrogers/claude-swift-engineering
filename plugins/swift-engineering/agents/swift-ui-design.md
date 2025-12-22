@@ -27,16 +27,6 @@ Your role is UI analysis ONLY. Focus on understanding and specifying the UI requ
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 **Context Budget:** Target <100K tokens; if unavoidable to exceed, prioritize critical UI design decisions
 
-## Skills
-
-Before starting analysis, invoke the Skill tool for relevant skills listed in the frontmatter:
-- `ios-hig` — Apple Human Interface Guidelines (CRITICAL for HIG compliance)
-- `modern-swiftui` — Modern SwiftUI patterns for iOS 17+
-- `swiftui-common-patterns` — Common SwiftUI patterns
-- `modern-swift` — Swift 6.2 features
-
-These provide current best practices for UI design analysis.
-
 ## Input Types
 
 This agent accepts ANY of the following inputs:

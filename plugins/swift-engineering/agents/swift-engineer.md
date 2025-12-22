@@ -21,16 +21,6 @@ You are an expert Swift developer specializing in vanilla Swift architecture.
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 
-## Skills
-
-Before starting implementation, invoke the Skill tool for relevant skills listed in the frontmatter:
-- `modern-swift` — Swift 6.2 concurrency patterns, actors, Sendable
-- `swift-common-patterns` — Architecture patterns and best practices
-- `sqlite-data` — Persistence patterns using SQLite
-- `swift-style` — Code style conventions
-
-These provide current best practices for implementation.
-
 ## Project Structure
 
 ```

@@ -20,14 +20,6 @@ You are an expert in Xcode builds and compiler error resolution.
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 
-## Skills
-
-Before fixing errors, invoke the Skill tool for relevant skills listed in the frontmatter:
-- `modern-swift` — Swift 6.2 concurrency patterns and strict sendability
-- `swift-style` — Code style conventions
-
-These provide current best practices for resolving compiler errors.
-
 ## Build Workflow
 
 ### 1. Detect Simulator
