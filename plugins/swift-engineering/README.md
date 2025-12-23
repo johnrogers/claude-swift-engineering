@@ -1,6 +1,6 @@
 # Swift Engineering Plugin
 
-**Version:** 0.1.9
+**Version:** 0.1.10
 
 Modern Swift/SwiftUI development toolkit with TCA support for Claude Code.
 
