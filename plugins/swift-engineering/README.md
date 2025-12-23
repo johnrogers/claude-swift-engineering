@@ -2,6 +2,8 @@
 
 **Version:** 0.1.10
 
+> ⚠️ **Experimental** — This plugin is a work in progress. APIs, agents, and workflows may change.
+
 Modern Swift/SwiftUI development toolkit with TCA support for Claude Code.
 
 ## Table of Contents
