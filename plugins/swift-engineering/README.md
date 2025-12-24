@@ -187,43 +187,6 @@ Each agent will automatically read the plan, update it with their work, and add 
 
 ## Advanced Features
 
-### Hooks System
-
-The plugin includes a hooks system to enforce best practices and prevent common pitfalls.
-
-**UserPromptSubmit Hook: skill-forced-eval-hook.sh**
-
-Forces explicit skill evaluation before implementation to ensure relevant knowledge bases are activated:
-
-- Requires YES/NO evaluation of each available skill
-- Ensures activation via the Skill tool for relevant skills
-- Prevents skipping directly to implementation without proper context
-
-**Setup Instructions:**
-
-```bash
-# 1. Symlink hooks-scripts to ~/.claude
-ln -s /path/to/claude-swift-engineering/plugins/swift-engineering/hooks-scripts ~/.claude/hooks-scripts
-
-# 2. Add to ~/.claude/settings.json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cat ~/.claude/hooks-scripts/UserPromptSubmit/skill-forced-eval-hook.sh"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-See [hooks-scripts/README.md](hooks-scripts/README.md) for complete documentation.
-
 ### Helper Scripts
 
 **get-recent-simulator.sh**
@@ -277,6 +240,8 @@ Or install from a marketplace:
 /plugin marketplace add <your-marketplace>
 /plugin install swift-engineering@<marketplace>
 ```
+
+See [hooks-scripts/README.md](hooks-scripts/README.md) for optional hooks configuration.
 
 ## Workflow
 

@@ -31,6 +31,37 @@ Add the plugin to Claude Code:
 /plugin install swift-engineering
 ```
 
+### Hooks (Optional)
+
+Enable skill/agent evaluation hooks for better workflow discipline:
+
+```bash
+# 1. Symlink hooks-scripts to ~/.claude
+ln -s /path/to/claude-swift-engineering/plugins/swift-engineering/hooks-scripts ~/.claude/hooks-scripts
+
+# 2. Add to ~/.claude/settings.json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat ~/.claude/hooks-scripts/UserPromptSubmit/skill-forced-eval-hook.sh"
+          },
+          {
+            "type": "command",
+            "command": "cat ~/.claude/hooks-scripts/UserPromptSubmit/agent-forced-eval-hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+See [plugins/swift-engineering/hooks-scripts/README.md](plugins/swift-engineering/hooks-scripts/README.md) for complete hook documentation.
+
 See [plugins/swift-engineering/README.md](plugins/swift-engineering/README.md) for complete documentation on using agents and available workflows.
 
 ## What's Included
@@ -46,10 +77,6 @@ See [plugins/swift-engineering/README.md](plugins/swift-engineering/README.md) f
 ### 11 Knowledge Skills
 
 Modern Swift, TCA, SwiftUI, iOS HIG, Testing, Persistence, and more. Each skill provides deep guidance on modern patterns and best practices.
-
-### Hooks System
-
-Enforce best practices with hooks that require explicit skill evaluation before implementation. See [plugins/swift-engineering/hooks-scripts/README.md](plugins/swift-engineering/hooks-scripts/README.md) for setup.
 
 ## For Contributors
 
