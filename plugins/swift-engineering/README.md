@@ -1,6 +1,6 @@
 # Swift Engineering Plugin
 
-**Version:** 0.1.11
+**Version:** 0.1.12
 
 > ⚠️ **Experimental** — This plugin is a work in progress. APIs, agents, and workflows may change.
 
