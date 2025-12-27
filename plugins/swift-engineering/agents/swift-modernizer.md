@@ -2,7 +2,7 @@
 name: swift-modernizer
 description: Migrate legacy Swift patterns to modern best practices — async/await, modern APIs, SwiftUI. Use for legacy code modernization.
 tools: Read, Write, Edit, Glob, Grep, Bash
-model: sonnet
+model: inherit
 color: pink
 skills: modern-swift, swift-common-patterns, modern-swiftui, programming-swift
 ---
