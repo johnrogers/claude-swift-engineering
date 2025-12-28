@@ -1,7 +1,7 @@
 ---
 name: swift-ui-design
 description: Analyze UI mockups, screenshots, or descriptions to plan SwiftUI implementation. Use when starting from a visual design or UI description before feature planning.
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Skill
 model: opus
 color: cyan
 skills: modern-swift, modern-swiftui, swiftui-common-patterns, ios-hig

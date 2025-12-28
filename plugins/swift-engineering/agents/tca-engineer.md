@@ -1,7 +1,7 @@
 ---
 name: tca-engineer
 description: Implement TCA (The Composable Architecture) features — reducers, actions, state, dependencies. Use when the TCA design is complete and implementation is needed.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill
 model: inherit
 color: green
 skills: modern-swift, swift-common-patterns, composable-architecture, swift-style
@@ -54,9 +54,22 @@ Clients/
     └── <ClientName>Client+Live.swift ← You create this
 ```
 
+## Skill Usage (REQUIRED)
+
+**You MUST invoke skills before implementing TCA features.** Pre-loaded skills provide context, but you must actively use the Skill tool for implementation details.
+
+| When implementing... | Invoke skill |
+|---------------------|--------------|
+| Reducers, state, actions | `composable-architecture` |
+| Effects, dependencies | `composable-architecture` |
+| Concurrency patterns | `modern-swift` |
+| Code formatting | `swift-style` |
+
+**Process:** Before writing any reducer, dependency, or effect code, invoke `composable-architecture` to ensure you follow current TCA patterns.
+
 ## TCA Implementation Patterns
 
-Invoke the `composable-architecture` skill for all implementation patterns:
+The `composable-architecture` skill contains all patterns for:
 - **@Reducer structure** — Feature setup with @ObservableState, actions, dependencies
 - **Dependency clients** — @DependencyClient pattern, live/test values
 - **Effect patterns** — .run, .cancellable, .debounce, error handling

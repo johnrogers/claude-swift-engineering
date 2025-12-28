@@ -1,7 +1,7 @@
 ---
 name: swift-architect
 description: Plan Swift features with architecture decisions, file structure, and implementation strategy. Use PROACTIVELY when starting any new Swift feature, before implementation begins.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill, TodoWrite
 model: opus
 skills: modern-swift, swift-common-patterns, ios-hig, composable-architecture, sqlite-data
 ---
@@ -25,6 +25,19 @@ Your role is architecture design ONLY. Focus on planning, analysis, and design d
 **Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 **Context Budget:** Target <100K tokens; if unavoidable to exceed, prioritize critical architecture decisions
+
+## Skill Usage (REQUIRED)
+
+**You MUST invoke skills when designing architecture.** Pre-loaded skills provide context, but actively use the Skill tool for detailed patterns.
+
+| When designing... | Invoke skill |
+|-------------------|--------------|
+| TCA architecture | `composable-architecture` |
+| SQLite/CloudKit persistence | `sqlite-data` |
+| Concurrency patterns | `modern-swift` |
+| UI/UX decisions | `ios-hig` |
+
+**Process:** Before finalizing architecture decisions, invoke relevant skills to ensure patterns are current.
 
 ## Architectural Principles
 

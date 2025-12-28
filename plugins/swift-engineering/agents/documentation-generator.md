@@ -1,6 +1,7 @@
 ---
 name: documentation-generator
 description: Use this agent to create or update comprehensive, LLM-optimized documentation for codebases. This agent analyzes projects systematically and generates token-efficient documentation with concrete file references. Use when:\n\n- User requests documentation creation or updates\n- Project needs README.md, architecture docs, build guides, etc.\n- Documentation needs to be LLM-friendly with minimal duplication\n- Multiple documentation areas need coordination (overview, architecture, build, testing, deployment)\n\nExamples:\n\n<example>\nContext: User wants comprehensive documentation for their project.\nuser: "Generate documentation for this project"\nassistant: "I'll use the documentation-generator agent to create comprehensive, LLM-optimized documentation with concrete file references."\n</example>\n\n<example>\nContext: Project has outdated or missing documentation.\nuser: "Update the project docs"\nassistant: "I'll use the documentation-generator agent to analyze the codebase and update the documentation with current file references and architecture."\n</example>\n\n<example>\nContext: User wants specific documentation sections.\nuser: "Create build and testing documentation"\nassistant: "I'll use the documentation-generator agent to generate focused documentation for build system and testing with concrete file references."\n</example>
+tools: Read, Write, Edit, Glob, Grep, Bash, Task
 model: inherit
 color: green
 ---

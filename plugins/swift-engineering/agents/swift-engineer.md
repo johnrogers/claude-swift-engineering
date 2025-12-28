@@ -1,7 +1,7 @@
 ---
 name: swift-engineer
 description: Implement vanilla Swift code — models, services, networking, persistence. Use when the plan specifies vanilla Swift (not TCA) architecture.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, Skill
 model: inherit
 color: green
 skills: modern-swift, swift-common-patterns, sqlite-data, swift-style
@@ -38,6 +38,19 @@ Sources/
     └── <Store>Store.swift
 ```
 
+## Skill Usage (REQUIRED)
+
+**You MUST invoke skills before implementing patterns.** Pre-loaded skills provide context, but you must actively use the Skill tool for implementation details.
+
+| When implementing... | Invoke skill |
+|---------------------|--------------|
+| Concurrency patterns | `modern-swift` |
+| Networking, DI, error handling | `swift-common-patterns` |
+| SQLite persistence | `sqlite-data` |
+| Code formatting | `swift-style` |
+
+**Process:** Before writing any significant code, invoke the relevant skill(s) to ensure you follow current patterns.
+
 ## Swift Conventions
 
 ### Concurrency
@@ -45,13 +58,6 @@ Sources/
 - Strict concurrency checking compliance
 - Proper `Sendable` conformance for types crossing concurrency boundaries
 - `@MainActor` for all UI-related code
-
-### Implementation Patterns
-
-Invoke skills for all patterns:
-- `modern-swiftui` — @Observable pattern for view models
-- `swift-common-patterns` — Networking, error handling, dependency injection
-- `modern-swift` — async/await, actors, Sendable conformance
 
 ### Code Organization
 - Use MARK comments: Properties, Initialization, Public Methods, Private Methods
