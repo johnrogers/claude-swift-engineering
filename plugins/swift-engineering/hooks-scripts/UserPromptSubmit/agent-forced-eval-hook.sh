@@ -21,7 +21,7 @@ Only after Step 4 is complete, proceed with implementation.
 CRITICAL: You MUST call Task() tool in Step 4. Do NOT skip to delegation.
 The evaluation (Step 3) is WORTHLESS unless you ACTIVATE (Step 4) the agents.
 
-EXAMPLES OF WHEN TO DELEGATE:
+EXAMPLES OF WHEN TO DELEGATE (NOT AN EXHAUSTIVE LIST OF AVAILABLE AGENTS):
 - "Create a SwiftUI view" → swift-engineering:swiftui-specialist
 - "Implement TCA reducer" → swift-engineering:tca-engineer
 - "Build and test" → apple-platform-builder

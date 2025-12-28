@@ -18,15 +18,7 @@ The evaluation (Step 1) is WORTHLESS unless you ACTIVATE (Step 2) the skills.
 CRITICAL: You MUST perform the above steps. Do not try to talk yourself out of it or convince yourself otherwise. The
 human has requested that you MUST perform the above steps, make sure that you do.
 
-EXAMPLES OF WHEN TO USE SKILLS:
-- "Implement SwiftUI view" → swift-engineering:swiftui-common-patterns
-- "Create TCA feature" → swift-engineering:composable-architecture
-- "Use @Observable" → swift-engineering:modern-swiftui
-- "Fix animation/motion" → swift-engineering:ios-hig
-- "Write tests" → swift-engineering:swift-testing
-- "Work with SQLiteData" → swift-engineering:sqlite-data
-
-Example of correct sequence:
+Example of correct sequence (NOT AN EXHAUSTIVE LIST OF SKILLS!):
 - programming-swift-skill:programming-swift: NO - not looking up Swift syntax
 - swift-engineering:modern-swiftui: YES - using @Observable pattern
 - swift-engineering:swiftui-common-patterns: YES - building SwiftUI views
