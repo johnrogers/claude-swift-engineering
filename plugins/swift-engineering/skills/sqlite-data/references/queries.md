@@ -279,3 +279,80 @@ let counter = try database.read { db in
   try Counter.find(id).fetchOne(db)
 }
 ```
+
+## Static Fetch Helpers (v1.4+)
+
+Convenient static methods for common fetches:
+
+```swift
+// Fetch all records
+let items = try Item.fetchAll(db)
+
+// Fetch with query
+let active = try Item.where { !$0.isArchived }.fetchAll(db)
+
+// Find by primary key
+let item = try Item.find(db, key: id)
+
+// Fetch count
+let total = try Item.fetchCount(db)
+```
+
+## Recursive CTEs
+
+Query hierarchical data like trees or org charts:
+
+```swift
+@Table
+nonisolated struct Category: Identifiable {
+    let id: UUID
+    var name = ""
+    var parentID: UUID?  // Self-referential
+}
+
+// Get all descendants of a category
+let descendants = try With {
+    // Base case: start with root
+    Category.where { $0.id.eq(rootCategoryId) }
+} recursiveUnion: { cte in
+    // Recursive case: join children to CTE
+    Category.all
+        .join(cte) { $0.parentID.eq($1.id) }
+        .select { $0 }
+} query: { cte in
+    cte.order(by: \.name)
+}
+.fetchAll(db)
+```
+
+### Walking Up the Tree (Ancestors)
+
+```swift
+let ancestors = try With {
+    Category.where { $0.id.eq(childCategoryId) }
+} recursiveUnion: { cte in
+    Category.all
+        .join(cte) { $0.id.eq($1.parentID) }
+        .select { $0 }
+} query: { cte in
+    cte.all
+}
+.fetchAll(db)
+```
+
+### Threaded Comments with Depth
+
+```swift
+let thread = try With {
+    Comment
+        .where { $0.parentID.is(nil) && $0.postID.eq(postId) }
+        .select { ($0, 0) }  // depth = 0 for root
+} recursiveUnion: { cte in
+    Comment.all
+        .join(cte) { $0.parentID.eq($1.id) }
+        .select { ($0, $1.depth + 1) }
+} query: { cte in
+    cte.order { ($0.depth, $0.createdAt) }
+}
+.fetchAll(db)
+```

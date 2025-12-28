@@ -14,12 +14,13 @@ Patterns for using the SQLiteData library with Swift/SwiftUI.
 | **[Table Models](references/models.md)** | Defining database tables with `@Table` macro, setting up primary keys, columns, or enums |
 | **[Queries](references/queries.md)** | Using `@FetchAll`, `@FetchOne`, `@Fetch` property wrappers, or building queries with joins/filters |
 | **[Writes](references/writes.md)** | Inserting, updating, upserting, or deleting records; managing transactions |
-| **[Views](references/views.md)** | Integrating `@FetchAll`/`@FetchOne` with SwiftUI views, `@Observable` models, or UIKit |
+| **[Views](references/views.md)** | Integrating `@FetchAll`/`@FetchOne` with SwiftUI views, `@Observable` models, UIKit, or TCA `@ObservableState` |
 | **[Migrations](references/migrations.md)** | Creating database migrations with DatabaseMigrator or `#sql()` macro |
 | **[CloudKit Sync](references/cloudkit.md)** | Setting up CloudKit private database sync, sharing, or sync delegates |
 | **[Dependencies](references/dependencies.md)** | Injecting database/sync engine via `@Dependency`, bootstrap patterns, or TCA integration |
 | **[Testing](references/testing.md)** | Setting up test databases, seeding data, or writing assertions for SQLite code |
 | **[Advanced](references/advanced.md)** | Implementing triggers, full-text search (FTS5), or custom database functions |
+| **[Schema Composition](references/schema-composition.md)** | Using @Selection column groups, single-table inheritance, or database views |
 
 ## Core Workflow
 

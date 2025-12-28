@@ -28,6 +28,7 @@ When writing async Swift code:
 
 Load these based on what you need:
 - **[Concurrency Essentials](references/concurrency-essentials.md)** — Load when writing new async code or converting completion handlers
+- **[Swift 6 Concurrency](references/swift6-concurrency.md)** — Load when using @concurrent, nonisolated(unsafe), or actor patterns
 - **[Task Groups](references/task-groups.md)** — Load when running multiple async operations in parallel
 - **[Task Cancellation](references/task-cancellation.md)** — Load when implementing long-running or cancellable operations
 - **[Strict Concurrency](references/strict-concurrency.md)** — Load when enabling Swift 6 strict mode or fixing Sendable errors

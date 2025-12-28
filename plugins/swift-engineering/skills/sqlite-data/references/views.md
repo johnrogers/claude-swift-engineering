@@ -246,6 +246,82 @@ class SearchModel {
 }
 ```
 
+## TCA (The Composable Architecture) Integration
+
+Use `@Fetch`/`@FetchOne` directly in TCA `@ObservableState` for reactive queries:
+
+```swift
+@ObservableState
+struct State: Equatable {
+    @Fetch(ItemsRequest()) var items: [Item] = []
+    @FetchOne(Bundle.where { $0.isActive }) var activeBundle: Bundle?
+}
+```
+
+### FetchKeyRequest for Complex Queries
+
+```swift
+struct ItemsRequest: FetchKeyRequest {
+    typealias Value = [Item]
+
+    func fetch(_ db: Database) throws -> [Item] {
+        try Item
+            .where { $0.isArchived == false }
+            .order { $0.createdAt.desc() }
+            .join(ItemDetail.all) { $1.id.eq($0.id) }
+            .select {
+                Item.Columns(
+                    id: $0.id,
+                    title: $1.title,
+                    createdAt: $0.createdAt
+                )
+            }
+            .fetchAll(db)
+    }
+}
+```
+
+### Anti-Pattern: Imperative Fetch Functions
+
+```swift
+// WRONG - Creates unnecessary Effect/Action boilerplate
+// Requires manual refetch after every mutation
+private func fetchItems() -> Effect<Action> {
+    .run { send in
+        let items = try await database.read { db in ... }
+        await send(.itemsLoaded(items))
+    }
+}
+
+case .view(.onAppear):
+    return fetchItems()  // Must call on appear
+
+case .view(.onItemDeleted(let id)):
+    return .run { send in
+        try await database.deleteItem(id)
+        // Must manually refetch after mutation!
+        let items = try await database.read { ... }
+        await send(.itemsLoaded(items))
+    }
+```
+
+```swift
+// RIGHT - Use @Fetch, mutations auto-refresh
+@ObservableState
+struct State: Equatable {
+    @Fetch(ItemsRequest()) var items: [Item] = []
+}
+
+case .view(.onAppear):
+    return .none  // Nothing needed - @Fetch observes automatically
+
+case .view(.onItemDeleted(let id)):
+    return .run { _ in
+        try await database.deleteItem(id)
+        // No refetch needed - @Fetch updates automatically
+    }
+```
+
 ## Best Practices
 
 1. **Use `@ObservationIgnored`** on `@FetchAll`/`@FetchOne` in `@Observable` classes
@@ -254,3 +330,4 @@ class SearchModel {
 4. **Wrap deletes in `withErrorReporting`** for consistent error handling
 5. **Use `observe {}`** in UIKit for reactive updates
 6. **Mark `@Observable` models as `@MainActor`** when used with SwiftUI
+7. **Use `@Fetch`/`@FetchOne` in TCA State** - avoid imperative fetch functions

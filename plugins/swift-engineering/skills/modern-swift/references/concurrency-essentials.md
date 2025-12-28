@@ -2,6 +2,18 @@
 
 Core patterns for async/await, @MainActor, actors, and Sendable in Swift 6.2.
 
+## Start Single-Threaded First
+
+> **Apple Guidance (WWDC 2025)**: "Start by running all code on the main thread."
+
+**When to add complexity:**
+1. **Stay single-threaded** if UI is responsive (<16ms per frame)
+2. **Add async/await** when network/file I/O would block UI
+3. **Add concurrency** when CPU work freezes UI (profile first!)
+4. **Add actors** when main actor contention causes bottlenecks
+
+Concurrent code is more complex. Only introduce it when profiling proves it's needed.
+
 ## Async/Await — NOT Completion Handlers
 
 ### ✅ Modern Pattern
