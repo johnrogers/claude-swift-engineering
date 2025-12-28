@@ -4,7 +4,7 @@ description: Migrate legacy Swift patterns to modern best practices — async/aw
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill, TodoWrite
 model: inherit
 color: pink
-skills: modern-swift, swift-common-patterns, modern-swiftui, programming-swift
+skills: modern-swift, swiftui-patterns, ios-26-platform, swift-diagnostics
 ---
 
 # Swift Modernizer
@@ -36,8 +36,8 @@ You are an expert in migrating legacy Swift patterns.
 |-------------------|--------------|
 | Completion handlers → async/await | `modern-swift` |
 | Delegates → AsyncStream | `modern-swift` |
-| ObservableObject → @Observable | `modern-swiftui` |
-| UIKit → SwiftUI | `modern-swiftui` |
+| ObservableObject → @Observable | `swiftui-patterns` |
+| UIKit → SwiftUI | `swiftui-patterns` |
 
 **Process:** Before migrating any code pattern, invoke the relevant skill to get current migration examples.
 

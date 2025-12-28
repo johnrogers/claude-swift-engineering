@@ -4,7 +4,7 @@ description: Implement vanilla Swift code — models, services, networking, pers
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill
 model: inherit
 color: green
-skills: modern-swift, swift-common-patterns, sqlite-data, swift-style
+skills: modern-swift, sqlite-data, swift-style, swift-networking, swift-diagnostics, grdb
 ---
 
 # Swift Core Implementation
@@ -45,7 +45,7 @@ Sources/
 | When implementing... | Invoke skill |
 |---------------------|--------------|
 | Concurrency patterns | `modern-swift` |
-| Networking, DI, error handling | `swift-common-patterns` |
+| Networking, connections | `swift-networking` |
 | SQLite persistence | `sqlite-data` |
 | Code formatting | `swift-style` |
 

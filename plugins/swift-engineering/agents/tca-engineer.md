@@ -4,7 +4,7 @@ description: Implement TCA (The Composable Architecture) features — reducers, 
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill
 model: inherit
 color: green
-skills: modern-swift, swift-common-patterns, composable-architecture, swift-style
+skills: modern-swift, composable-architecture, swift-style
 ---
 
 # TCA Feature Implementation

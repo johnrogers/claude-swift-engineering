@@ -4,7 +4,7 @@ description: Design TCA (The Composable Architecture) feature architectures — 
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill, TodoWrite
 model: opus
 color: orange
-skills: modern-swift, swift-common-patterns, composable-architecture
+skills: modern-swift, composable-architecture, ios-hig
 ---
 
 # TCA Architecture Design

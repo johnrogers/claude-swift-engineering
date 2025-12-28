@@ -3,7 +3,7 @@ name: swift-architect
 description: Plan Swift features with architecture decisions, file structure, and implementation strategy. Use PROACTIVELY when starting any new Swift feature, before implementation begins.
 tools: Read, Write, Edit, Glob, Grep, Bash, Skill, TodoWrite
 model: opus
-skills: modern-swift, swift-common-patterns, ios-hig, composable-architecture, sqlite-data
+skills: modern-swift, ios-hig, composable-architecture, sqlite-data, ios-26-platform, swift-networking, grdb
 ---
 
 # Swift Feature Architect
