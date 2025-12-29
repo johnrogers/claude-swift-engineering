@@ -2,6 +2,23 @@
 
 Patterns for fetching data from the database using `@FetchAll`, `@FetchOne`, and `@Fetch`.
 
+## When to Use Which
+
+| Wrapper | Use For | Example |
+|---------|---------|---------|
+| `@FetchAll` | Inline queries returning **multiple records** | `@FetchAll(Item.order { $0.createdAt.desc() }) var items` |
+| `@FetchOne` | Inline queries returning **single record or aggregate** | `@FetchOne(Item.where { $0.isActive }) var activeItem` |
+| `@Fetch` | **FetchKeyRequest only** - when you need data transformation | `@Fetch(ComplexRequest()) var result` |
+
+**Common mistake**: Using `@Fetch` for simple queries. It requires `FetchKeyRequest` conformance.
+
+Only create a `FetchKeyRequest` struct when you need to:
+- Transform data with `.map()` after fetching
+- Perform multiple database operations in one transaction
+- Return a custom result type that differs from the raw query
+
+For simple ordering, filtering, or joins without transformation → use `@FetchAll` or `@FetchOne`.
+
 ## @FetchAll - Multiple Records
 
 Fetch multiple records with automatic SwiftUI updates:
