@@ -1,8 +1,8 @@
-description: Asks Claude to generate a handoff summary for a future session. Writes it to file. It can then be read by the `resume` command.
+description: Asks Claude to generate a snapshot summary for a future session. Writes it to file. It can then be read by the `resume-snapshot` command.
 disable-model-invocation: true
 ---
 
-Generate a handoff summary and write it to `.claude/handoff.md`.
+Generate a handoff summary and write it to `.claude/snapshot.md`.
 
 ## Include:
 
@@ -15,4 +15,4 @@ Keep under 250 words. Use IDs and file paths for quick lookup.
 
 ## Output:
 
-Write the summary to `.claude/handoff.md` (create directory if needed).
+Write the summary to `.claude/snapshot.md`.

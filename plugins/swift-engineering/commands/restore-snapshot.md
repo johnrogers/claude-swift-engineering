@@ -1,8 +1,8 @@
-description: Resume work from a previous session handoff. Reads the handoff file and then deletes it when done.
+description: Resume work from a previous session snapshot. Reads the snapshot file and then deletes it when done.
 disable-model-invocation: true
 ---
 
-Read `.claude/handoff.md` and use it to orient this session.
+Read `.claude/snapshot.md` and use it to orient this session.
 
 1. Read the handoff file
 2. If older than 24 hours, warn the user before proceeding
