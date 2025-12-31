@@ -210,6 +210,22 @@ func testDelegateNotification() async {
 }
 ```
 
+### Receive Without State Change
+
+**IMPORTANT**: When receiving an action that doesn't change state, omit the closure entirely:
+
+```swift
+// ✅ No state change expected - omit closure
+await store.receive(\.delegate.bundleSelected)
+await store.receive(\.delegate.cancelled)
+
+// ❌ WRONG - causes "Expected state to change, but no change occurred"
+await store.receive(\.delegate.bundleSelected) { _ in }
+await store.receive(\.delegate.cancelled) { _ in }
+```
+
+The closure in `receive` tells TestStore you expect state mutations. Using `{ _ in }` or `{ $0 }` when no change occurs will fail the test.
+
 ## State Verification
 
 ### Basic State Verification
@@ -845,6 +861,88 @@ func onAppearSetsDefaultList() async {
 }
 ```
 
+## ConfirmationDialogState Testing
+
+When testing features that use `ConfirmationDialogState`, follow these patterns:
+
+### Basic Pattern
+
+```swift
+@Test("confirmation dialog action deletes with preserve")
+func testConfirmationDialogAction() async {
+    var state = Feature.State()
+    state.confirmDeleteBundleId = testBundleId
+    state.confirmationDialog = .deleteBundle(name: "Test", itemCount: 2)
+
+    let deleteCalled = LockIsolated<(UUID, Bool)?>(nil)
+
+    let store = TestStore(initialState: state) {
+        Feature()
+    } withDependencies: {
+        $0.bundleClient.delete = { id, preserveItems in
+            deleteCalled.setValue((id, preserveItems))
+        }
+    }
+
+    // Send the presented action and expect BOTH state changes
+    await store.send(.confirmationDialog(.presented(.moveItemsToInbox))) {
+        $0.confirmDeleteBundleId = nil
+        $0.confirmationDialog = nil  // Dialog clears on action
+    }
+
+    // CRITICAL: Exhaust effects from .run blocks
+    await store.finish()
+
+    #expect(deleteCalled.value?.0 == testBundleId)
+    #expect(deleteCalled.value?.1 == true)
+}
+```
+
+### Key Points
+
+1. **Clear both state properties**: When a dialog action fires, set both `confirmationDialog = nil` and any tracking ID to `nil`
+2. **Use `await store.finish()`**: Effects from `.run { }` blocks must be exhausted after sending actions
+3. **Dialog dismiss**: For `.dismiss` action, only `confirmationDialog` clears (not tracking IDs)
+
+```swift
+await store.send(.confirmationDialog(.dismiss)) {
+    $0.confirmationDialog = nil
+    // Note: confirmDeleteBundleId stays set (becomes stale but harmless)
+}
+```
+
+## Dependency Mocking Completeness
+
+When modifying reducers to call new dependencies, **always update corresponding test mocks**:
+
+### Common Pitfall
+
+```swift
+// Reducer calls TWO dependencies:
+case .view(.saveTapped):
+    return .run { send in
+        try await bundleClient.update(id, name, color)
+        try await bundleClient.updateTemporary(id, isTemporary)  // NEW!
+        await send(.delegate(.saved))
+    }
+
+// ❌ Test only mocks ONE - will fail with unimplemented dependency
+let store = TestStore(...) {
+    $0.bundleClient.update = { ... }
+    // Missing: $0.bundleClient.updateTemporary
+}
+
+// ✅ Mock ALL dependencies called by the action
+let store = TestStore(...) {
+    $0.bundleClient.update = { ... }
+    $0.bundleClient.updateTemporary = { _, _ in }  // Added!
+}
+```
+
+### Rule
+
+When you add a dependency call to a reducer, grep for existing tests and add the mock.
+
 ## Summary
 
 **Key Principles**:
@@ -858,3 +956,5 @@ func onAppearSetsDefaultList() async {
 8. Use test data factories for consistent test data
 9. Organize tests with MARK comments
 10. Document complex tests with comments
+11. Use `await store.finish()` to exhaust effects from `.run` blocks
+12. When adding new dependency calls, update ALL test mocks
