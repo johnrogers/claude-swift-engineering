@@ -10,12 +10,12 @@ A specialized AI toolkit for building professional iOS/macOS features with moder
 
 The **swift-engineering plugin** is a production-ready toolkit for professional Swift development:
 
-- **13 Ultra-Specialized Agents** — Planning (Opus), implementation (Sonnet), mechanical tasks (Haiku) with clear handoffs
+- **12 Ultra-Specialized Agents** — Planning (Opus), implementation (Inherit), utilities (Haiku) with clear handoffs
 - **TCA Support** — Full workflow from architecture design to testing for The Composable Architecture
 - **Modern Swift 6.2** — iOS 26+ with strict concurrency, async/await, actors, Sendable
-- **End-to-End Workflows** — Plan → Implement → Review → Test → Build → Document
-- **Quality Assurance** — Automated smoke tests, code review, build verification
-- **Knowledge Skills** — 11 specialized knowledge bases covering modern Swift, SwiftUI, TCA, testing, and more
+- **End-to-End Workflows** — Plan → Implement → Test → Review → Document
+- **Code Quality** — Integrated code review, accessibility compliance, and performance checks
+- **Knowledge Skills** — 18 specialized knowledge bases covering architecture patterns, frameworks, design, and development tools
 
 ## Quick Start
 
@@ -66,17 +66,17 @@ See [plugins/swift-engineering/README.md](plugins/swift-engineering/README.md) f
 
 ## What's Included
 
-### 13 Specialized Agents
+### 12 Specialized Agents
 
 | Type | Agents | Responsibility |
 |------|--------|-----------------|
 | **Planning** | @swift-ui-design, @swift-architect, @tca-architect | Architecture decisions (Opus, read-only) |
-| **Implementation** | @tca-engineer, @swift-engineer, @swiftui-specialist, @swift-test-creator, @swift-documenter, @documentation-generator, @swift-code-reviewer, @swift-modernizer | Code creation and review (Sonnet) |
-| **Mechanical** | @swift-builder, @search | Build verification and code search (Haiku) |
+| **Implementation** | @tca-engineer, @swift-engineer, @swiftui-specialist, @swift-test-creator, @documentation-generator, @swift-code-reviewer, @swift-modernizer | Code creation and review (Inherit) |
+| **Utilities** | @swift-documenter, @search | API documentation and code search (Haiku) |
 
-### 11 Knowledge Skills
+### 18 Knowledge Skills
 
-Modern Swift, TCA, SwiftUI, iOS HIG, Testing, Persistence, and more. Each skill provides deep guidance on modern patterns and best practices.
+Architecture patterns (TCA, SwiftUI, modern Swift, advanced gestures), frameworks (SQLite, GRDB, StoreKit, networking), platform design (iOS 26, HIG, localization, haptics), and development tools (testing, style, diagnostics). Each skill provides deep guidance on modern patterns and best practices.
 
 ## For Contributors
 
@@ -89,8 +89,8 @@ claude-swift-engineering/
 ├── .github/workflows/                      # CI/CD pipelines
 ├── plugins/
 │   └── swift-engineering/                  # Main plugin
-│       ├── agents/                         # 13 specialized agents
-│       ├── skills/                         # 11 knowledge skills
+│       ├── agents/                         # 12 specialized agents
+│       ├── skills/                         # 18 comprehensive skills
 │       ├── hooks-scripts/                  # Hooks system
 │       ├── scripts/                        # Helper utilities
 │       ├── rules/                          # Development rules
@@ -132,7 +132,7 @@ This updates version numbers across plugin.json, marketplace.json, and other met
 The plugin implements several key principles:
 
 - **Ultra-Specialization** — Each agent has one clear responsibility with defined handoffs
-- **Model Stratification** — Opus for architecture (cost-effective and accurate), Sonnet for implementation (balanced), Haiku for mechanical tasks (fast)
+- **Model Stratification** — Opus for architecture (best reasoning), Inherit for implementation (cost-effective), Haiku for utilities (fast)
 - **Local-First** — Default to SQLite and UserDefaults, never SwiftData or Core Data
 - **Modern Swift Only** — Swift 6.2 with strict concurrency, no deprecated APIs
 - **Read-Only Planning** — Planning agents cannot modify code, ensuring clear separation

@@ -134,3 +134,15 @@ enum Math {
     static let pi = 3.14159
 }
 ```
+
+## Common Mistakes
+
+1. **Abbreviations beyond URL, ID, UUID** — Abbreviations like `cfg`, `mgr`, `ctx`, `desc` hurt readability. Spell them out: `configuration`, `manager`, `context`, `description`. The three exceptions are URL, ID, UUID.
+
+2. **Nested guard/if statements** — Deep nesting makes code hard to follow. Use early returns and guards to keep the happy path left-aligned.
+
+3. **Inconsistent self usage** — Either always omit `self` (preferred) or always use it. Mixing makes code scanning harder and confuses capture semantics.
+
+4. **Overly generic type names** — `Manager`, `Handler`, `Helper`, `Coordinator` are too vague. Names should explain responsibility: `PaymentProcessor`, `EventDispatcher`, `ImageCache`, `NavigationCoordinator`.
+
+5. **Implied access control** — Don't skip access control. Explicit `private`, `public` helps future maintainers understand module boundaries. `internal` is default, so omit it.

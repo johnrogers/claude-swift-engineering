@@ -41,3 +41,15 @@ Direct SQLite access using [GRDB.swift](https://github.com/groue/GRDB.swift) - t
 - iOS 13+, macOS 10.15+
 - Swift 5.7+
 - GRDB.swift 6.0+
+
+## Common Mistakes
+
+1. **Performance assumptions without EXPLAIN PLAN** — Assuming your query is fast or slow without checking `EXPLAIN QUERY PLAN` is guessing. Always profile queries with EXPLAIN before optimizing.
+
+2. **Missing indexes on WHERE clauses** — Queries filtering on non-indexed columns scan the entire table. Index any column used in WHERE, JOIN, or ORDER BY clauses for large tables.
+
+3. **Improper migration ordering** — Running migrations out of order or skipping intermediate versions breaks schema consistency. Always apply migrations sequentially; never jump versions.
+
+4. **Record conformance shortcuts** — Not conforming Record types to `PersistableRecord` or `FetchableRecord` correctly leads to silent data loss or deserialization failures. Always implement all required protocols correctly.
+
+5. **ValueObservation without proper cleanup** — Forgetting to cancel ValueObservation when views disappear causes memory leaks and stale data subscriptions. Store the cancellable and clean up in deinit.

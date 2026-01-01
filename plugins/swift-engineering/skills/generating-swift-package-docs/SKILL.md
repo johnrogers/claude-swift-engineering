@@ -1,9 +1,17 @@
 ---
 name: generating-swift-package-docs
-description: Use when encountering unfamiliar import statements, exploring dependency APIs, or when user asks "what's import X" or "what does X do". Generates on-demand API documentation for Swift package dependencies in Xcode projects.
+description: Use when encountering unfamiliar import statements, exploring dependency APIs, or when user asks "what's import X" or "what does X do". Generates on-demand API documentation for Swift package dependencies.
 ---
 
 # Swift Package Documentation Generator
+
+Generates API documentation for Swift package dependencies on-demand, extracting symbol information from Xcode's DerivedData to answer "what does this library do?"
+
+## Overview
+
+When exploring unfamiliar dependencies, generate their documentation automatically instead of guessing from code. This tool uses `interfazzle` to extract symbol information from compiled modules.
+
+## How to Use
 
 When asked about an unfamiliar Swift module import:
 

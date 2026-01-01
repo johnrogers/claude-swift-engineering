@@ -5,6 +5,10 @@ description: Use when implementing iOS 17+ SwiftUI patterns: @Observable/@Bindab
 
 # SwiftUI Patterns (iOS 17+)
 
+SwiftUI 17+ removes ObservableObject boilerplate with @Observable, simplifies environment injection with @Environment, and introduces task-based async patterns. The core principle: use Apple's modern APIs instead of reactive libraries.
+
+## Overview
+
 ## Quick Reference
 
 | Need | Use (iOS 17+) | NOT |
@@ -42,3 +46,17 @@ description: Use when implementing iOS 17+ SwiftUI patterns: @Observable/@Bindab
 | [accessibility.md](references/accessibility.md) | VoiceOver, Dynamic Type, accessibility actions |
 | [async-patterns.md](references/async-patterns.md) | Loading states, refresh, background tasks |
 | [composition.md](references/composition.md) | Reusable view modifiers or complex conditional UI |
+
+## Common Mistakes
+
+1. **Over-using `@Bindable` for passed models** — Creating `@Bindable` for every property causes unnecessary view reloads. Use `@Bindable` only for mutable model properties that need two-way binding. Read-only computed properties should use regular properties.
+
+2. **State placement errors** — Putting model state in the view instead of a dedicated `@Observable` model causes view logic to become tangled. Always separate model and view concerns.
+
+3. **NavigationPath state corruption** — Mutating `NavigationPath` incorrectly can leave it in inconsistent state. Use `navigationDestination(for:destination:)` with proper state management to avoid path corruption.
+
+4. **Missing `.task` cancellation** — `.task` handles cancellation on disappear automatically, but nested Tasks don't. Complex async flows need explicit cancellation tracking to avoid zombie tasks.
+
+5. **Ignoring environment invalidation** — Changing environment values at parent doesn't invalidate child views automatically. Use `@Environment` consistently and understand when re-renders happen based on observation.
+
+6. **UIKit interop memory leaks** — `UIViewRepresentable` and `UIViewControllerRepresentable` can leak if delegate cycles aren't broken. Weak references and explicit cleanup are required.

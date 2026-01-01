@@ -45,3 +45,15 @@ struct CardView: View {
 
 - **Use Compiler to Extract Swift Strings**: Yes
 - **Localization Prefers String Catalogs**: Yes
+
+## Common Mistakes
+
+1. **Forgetting String Catalog in Build Phases** — Adding String Catalog but forgetting to check "Localize" in File Inspector means it's not embedded. Always verify in Build Phases > Copy Bundle Resources.
+
+2. **Pseudo-localization not tested** — Not running your app with pseudo-localization (German/Chinese pseudo-locale) means you miss text overflow and RTL issues. Always test with pseudo-localization before translation.
+
+3. **Hardcoded strings anywhere** — Even one hardcoded string outside the String Catalog breaks extraction and automation. Use `String(localized:)` everywhere or use `LocalizedStringResource` for deferred localization.
+
+4. **Context loss in translations** — Providing no comment for translators means they guess context and get it wrong. Add comments explaining where the string appears and what it means.
+
+5. **RTL layouts not tested** — Assuming LTR layout works for RTL languages (Arabic, Hebrew) fails miserably. Test with system language set to Arabic and verify semantic directions are used.

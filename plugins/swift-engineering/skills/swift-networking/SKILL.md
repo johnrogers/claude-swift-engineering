@@ -30,3 +30,15 @@ Network.framework is Apple's modern networking API for TCP/UDP connections, repl
 
 - **URLSession**: HTTP, HTTPS, WebSocket, simple TCP/TLS streams
 - **Network.framework**: UDP, custom protocols, low-level control, peer-to-peer, gaming
+
+## Common Mistakes
+
+1. **Ignoring state handlers** — Creating an NWConnection without a state change handler means you never learn when it's ready or failed. Always implement the state handler first.
+
+2. **Blocking the main thread** — Never call `receive()` on the main queue. Use a background DispatchQueue or Task for all network operations.
+
+3. **Wrong queue selection** — Using the wrong queue (UI queue for network work, or serial queue for concurrent reads) causes deadlocks or silent failures. Always explicit your queue choice.
+
+4. **Not handling network transitions** — WiFi/cellular switches or network loss aren't always detected automatically. Implement viability checks and state monitoring for robust apps.
+
+5. **Improper error recovery** — Network errors need retry logic with backoff. Immediately failing on transient errors (timeouts, temporary loss) creates poor UX.

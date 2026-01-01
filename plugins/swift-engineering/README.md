@@ -1,18 +1,29 @@
 # Swift Engineering Plugin
 
-**Version:** 0.1.23
+**Version:** 0.1.25
 
-> ⚠️ **Experimental** — This plugin is a work in progress. APIs, agents, and workflows may change.
+> ⚠️ **Experimental** — This plugin is actively developed. APIs, agents, and workflows may evolve.
 
-Modern Swift/SwiftUI development toolkit with TCA support for Claude Code.
+Modern Swift/SwiftUI development toolkit with TCA support for Claude Code. Provides 12 specialized agents and 18 comprehensive skills for planning, implementing, testing, and shipping production iOS/macOS applications.
+
+## Features at a Glance
+
+- **12 specialized agents** — Planning, architecture, implementation, testing, and documentation
+- **18 comprehensive skills** — Architecture patterns, frameworks, design guidelines, and development tools
+- **Ultra-modern Swift** — iOS 26+, Swift 6.2, strict concurrency, SwiftUI-only
+- **TCA-first architecture** — Separate architect and engineer agents with coordinated handoffs
+- **Production-ready** — Built-in code review, testing, and quality assurance workflows
+- **Coordination via plans** — All agents share state through plan files, no manual coordination needed
 
 ## Table of Contents
 
-- [Features](#features)
+- [Core Capabilities](#core-capabilities)
 - [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
 - [Using Agents](#using-agents)
 - [Agents](#agents)
 - [Skills](#skills)
+- [Installation](#installation)
 - [Advanced Features](#advanced-features)
 - [Workflow](#workflow)
 - [Agent Handoff Model](#agent-handoff-model)
@@ -20,20 +31,47 @@ Modern Swift/SwiftUI development toolkit with TCA support for Claude Code.
 - [Architecture Conventions](#architecture-conventions)
 - [Model Usage](#model-usage)
 - [Quality Assurance](#quality-assurance)
+- [Contributing](#contributing)
+- [License](#license)
+- [Feedback](#feedback)
 
-## Features
+## Core Capabilities
 
-- **Ultra-specialized agents** — Each agent has clear boundaries and handoffs
-- **TCA support** — Separate architect (design) and engineer (implementation) agents
-- **iOS 26+ / Swift 6.2** — Modern Swift with strict concurrency
-- **Swift Testing** — Modern testing framework (@Test, #expect, #require)
-- **Build automation** — Xcode build and test verification
-- **Code review** — Quality, security, performance, and HIG compliance
-- **Modernization** — Migrate legacy patterns to modern Swift
+### Planning & Architecture
+- Design features with UI mockups or descriptions
+- Architecture decisions (TCA vs vanilla Swift)
+- TCA-specific design (state, actions, effects, dependencies)
+
+### Implementation
+- Reducers and effects (TCA)
+- Business logic and models (vanilla Swift)
+- SwiftUI views with accessibility
+- Modern async/await patterns
+- Database operations (SQLite, CloudKit sync)
+
+### Quality Assurance
+- Comprehensive testing with Swift Testing
+- Code review (security, performance, HIG compliance)
+- Modernization (legacy to modern Swift conversion)
+- Documentation generation
+
+### Coordination
+- Shared plan files for agent handoffs
+- Automatic status tracking
+- Clear ownership and next steps
 
 ## Prerequisites
 
 **Sosumi MCP Server** — Required for Apple documentation lookup. Agents use this to verify modern API usage (2025). Configure in your Claude Code settings before using this plugin.
+
+## Getting Started
+
+1. **Install** this plugin in your Claude Code plugins directory
+2. **Build a feature** by invoking agents in order (start with `@swift-architect` for new features)
+3. **Agents coordinate** through plan files — no manual handoffs needed
+4. **End with code review** via `@swift-code-reviewer` before shipping
+
+For detailed workflows and examples, see [Using Agents](#using-agents) section below.
 
 ## Using Agents
 
@@ -73,11 +111,11 @@ Implements the UI without mixing in business logic.
 ```
 Creates test files with test cases.
 
-**Step 6: Verify build**
+**Step 6: Code review and verification**
 ```
-@swift-builder Build the project and verify everything compiles without errors
+@swift-code-reviewer Review the implementation for quality, security, and performance
 ```
-Ensures the code is production-ready.
+Verifies code meets project standards before shipping.
 
 ### Alternative Workflow: Vanilla Swift Feature (No TCA)
 
@@ -98,9 +136,9 @@ For simpler features without complex state management:
 @swift-test-creator Write tests for the calculator using Swift Testing
 ```
 
-**Step 4: Verify build**
+**Step 4: Code review**
 ```
-@swift-builder Build and verify
+@swift-code-reviewer Review the implementation for quality and performance
 ```
 
 ### Common Tasks by Agent
@@ -119,7 +157,7 @@ For simpler features without complex state management:
 | Documentation | `@swift-documenter` | Document the public API surface |
 | Project docs | `@documentation-generator` | Create comprehensive project documentation |
 | Fast code search | `@search` | Find all UserDefaults usage in the codebase |
-| Build verification | `@swift-builder` | Build the project and fix any errors |
+| Code review | `@swift-code-reviewer` | Review the implementation for quality and security |
 
 ### Plan File Coordination
 
@@ -136,54 +174,72 @@ Each agent will automatically read the plan, update it with their work, and add 
 - **Start with `@swift-architect`** for new features to get architecture decisions
 - **Use `@swift-ui-design`** if you have mockups or screenshots to analyze
 - **Choose your path** — TCA for complex state, vanilla Swift for simpler features
-- **Always end with `@swift-builder`** to verify the project compiles
+- **Always end with `@swift-code-reviewer`** to verify quality before shipping
 - **Agents coordinate via plan files** — No manual handoff needed, just invoke the next agent
 
 ## Agents
 
 ### Planning Agents (Opus, READ-ONLY)
 
-| Agent | Purpose | Color |
+| Agent | Purpose | Model |
 |-------|---------|-------|
-| `@swift-ui-design` | Analyze mockups OR descriptions into UI specifications | cyan |
-| `@swift-architect` | Architecture decisions (TCA vs vanilla, persistence) | — |
-| `@tca-architect` | TCA-specific design (state, actions, dependencies) | orange |
+| `@swift-ui-design` | Analyze mockups OR descriptions into UI specifications | Opus |
+| `@swift-architect` | Architecture decisions (TCA vs vanilla, persistence) | Opus |
+| `@tca-architect` | TCA-specific design (state, actions, dependencies) | Opus |
 
-### Implementation Agents (Sonnet)
+### Implementation Agents (Inherit)
 
-| Agent | Purpose | Color |
+| Agent | Purpose | Model |
 |-------|---------|-------|
-| `@tca-engineer` | TCA implementation (reducers, effects) | green |
-| `@swift-engineer` | Vanilla Swift implementation (models, services) | green |
-| `@swiftui-specialist` | SwiftUI views (declarative only, no business logic) | yellow |
-| `@swift-test-creator` | Create tests using Swift Testing | green |
-| `@swift-documenter` | Generate inline and API documentation | cyan |
-| `@documentation-generator` | Generate comprehensive, LLM-optimized project documentation | green |
-| `@swift-code-reviewer` | Review code quality, security, performance | orange |
-| `@swift-modernizer` | Migrate legacy patterns to modern Swift | pink |
+| `@tca-engineer` | TCA implementation (reducers, effects) | Inherit |
+| `@swift-engineer` | Vanilla Swift implementation (models, services) | Inherit |
+| `@swiftui-specialist` | SwiftUI views (declarative only, no business logic) | Inherit |
+| `@swift-test-creator` | Create tests using Swift Testing | Inherit |
+| `@swift-documenter` | Generate API documentation and comments | Haiku |
+| `@documentation-generator` | Generate comprehensive, LLM-optimized project documentation | Inherit |
+| `@swift-code-reviewer` | Review code quality, security, performance | Inherit |
+| `@swift-modernizer` | Migrate legacy patterns to modern Swift | Inherit |
 
-### Mechanical Agents (Haiku)
+### Utility Agents (Haiku)
 
-| Agent | Purpose | Color |
+| Agent | Purpose | Model |
 |-------|---------|-------|
-| `@swift-builder` | Build verification and error fixing | — |
-| `@search` | Fast code search to prevent grep noise from polluting context | orange |
+| `@search` | Fast code search to prevent grep noise from polluting context | Haiku |
 
 ## Skills
 
+### Architecture & Patterns
 | Skill | Purpose |
 |-------|---------|
-| `modern-swift` | Swift 6.2 concurrency essentials (async/await, actors, @MainActor) |
-| `swift-common-patterns` | Architecture patterns (DefaultProvider, actors, DI, networking) |
-| `modern-swiftui` | Modern SwiftUI patterns (iOS 17+, @Observable, @Bindable) |
-| `swiftui-common-patterns` | SwiftUI patterns (MVVM, navigation, performance, accessibility) |
-| `composable-architecture` | TCA patterns and best practices |
-| `ios-hig` | Apple Human Interface Guidelines |
-| `swift-testing` | Swift Testing framework patterns |
-| `swift-style` | Code style conventions |
-| `sqlite-data` | SQLite persistence patterns |
-| `generating-swift-package-docs` | Package documentation generation |
-| `programming-swift` | Language reference (loaded on-demand) |
+| `composable-architecture` | TCA patterns, reducers, effects, testing, performance |
+| `swiftui-patterns` | iOS 17+ SwiftUI (@Observable, @Bindable, navigation, accessibility) |
+| `swiftui-advanced` | Advanced gestures, adaptive layout, architecture decisions |
+| `modern-swift` | Swift 6.2 concurrency (async/await, actors, @MainActor, Sendable) |
+
+### Frameworks & Libraries
+| Skill | Purpose |
+|-------|---------|
+| `sqlite-data` | SQLiteData library (@Table, migrations, CloudKit sync) |
+| `grdb` | GRDB direct SQLite access (complex queries, performance) |
+| `storekit` | StoreKit 2 in-app purchases and subscriptions |
+| `foundation-models` | Apple on-device AI (iOS 26+, summarization, extraction) |
+| `swift-networking` | Network.framework (TCP/UDP, custom protocols) |
+
+### Platform & Design
+| Skill | Purpose |
+|-------|---------|
+| `ios-hig` | Apple Human Interface Guidelines (accessibility, dark mode, haptics) |
+| `ios-26-platform` | iOS 26 features (Liquid Glass, new APIs, backward compatibility) |
+| `haptics` | Haptic feedback (UIFeedbackGenerator, Core Haptics, AHAP patterns) |
+| `localization` | Internationalization (String Catalogs, pluralization, RTL) |
+
+### Development Tools
+| Skill | Purpose |
+|-------|---------|
+| `swift-testing` | Swift Testing framework (@Test, parameterized tests, async) |
+| `swift-style` | Code style conventions (naming, golden path, organization) |
+| `swift-diagnostics` | Systematic debugging (navigation, build issues, memory) |
+| `generating-swift-package-docs` | Generate API docs for Swift package dependencies |
 
 ## Advanced Features
 
@@ -228,20 +284,28 @@ Collaborative problem-solving approach for design decisions and complex architec
 
 ## Installation
 
+### Local Development
 Drop this folder into your Claude Code plugins directory:
 
-```
+```bash
 ~/.claude/plugins/swift-engineering/
 ```
 
-Or install from a marketplace:
-
+Then in Claude Code:
 ```
-/plugin marketplace add <your-marketplace>
-/plugin install swift-engineering@<marketplace>
+/plugin reload
 ```
 
-See [hooks-scripts/README.md](hooks-scripts/README.md) for optional hooks configuration.
+### Configuration
+Before using agents, ensure the **Sosumi MCP Server** is configured in your Claude Code settings for Apple documentation lookup.
+
+Optional: Configure hooks for git automation. See [hooks-scripts/README.md](hooks-scripts/README.md) for details.
+
+### First Run
+1. Navigate to your Swift project directory
+2. Invoke an agent: `@swift-architect Design a new feature`
+3. Agent creates a plan file at `docs/plans/<feature-name>.md`
+4. Each subsequent agent updates the plan and adds handoff notes
 
 ## Workflow
 
@@ -253,21 +317,18 @@ UI description/mockup? ──yes──► @swift-ui-design (Opus)
         ▼
    @swift-architect (Opus)  →  docs/plans/<feature>.md
         │
-        ├── TCA chosen ──► @tca-architect (Opus) ──► @tca-engineer (Sonnet)
+        ├── TCA chosen ──► @tca-architect (Opus) ──► @tca-engineer (Inherit)
         │                                                    │
-        └── Vanilla chosen ───────────────► @swift-engineer (Sonnet)
+        └── Vanilla chosen ───────────────► @swift-engineer (Inherit)
                                                     │
                                                     ▼
-                                          @swiftui-specialist (Sonnet)
+                                          @swiftui-specialist (Inherit)
                                                     │
                                                     ▼
-                                       @swift-code-reviewer (optional)
+                                         @swift-test-creator (Inherit)
                                                     │
                                                     ▼
-                                         @swift-test-creator (Sonnet)
-                                                    │
-                                                    ▼
-                                           @swift-builder (Haiku)
+                                       @swift-code-reviewer (Inherit)
                                                     │
                                                     ▼
                                         @swift-documenter (optional)
@@ -286,8 +347,8 @@ Each agent knows exactly when to hand off:
 | @tca-engineer | @swiftui-specialist | Implementation complete |
 | @swift-engineer | @swiftui-specialist | Implementation complete |
 | @swiftui-specialist | @swift-test-creator | Views complete |
-| @swift-test-creator | @swift-builder | Tests written |
-| @swift-builder | @swift-documenter | Build successful |
+| @swift-test-creator | @swift-code-reviewer | Tests written |
+| @swift-code-reviewer | @swift-documenter | Code review complete |
 
 ## Plan File Format
 
@@ -303,7 +364,8 @@ All agents share state via a plan file at `docs/plans/<feature-name>.md`:
 - [ ] Implementation (@tca-engineer or @swift-engineer)
 - [ ] Views (@swiftui-specialist)
 - [ ] Tests (@swift-test-creator)
-- [ ] Build verified (@swift-builder)
+- [ ] Code review (@swift-code-reviewer)
+- [ ] Documentation (@swift-documenter)
 
 ## MCP Servers
 - **sosumi** — Apple documentation lookup (2025 APIs)
@@ -331,9 +393,9 @@ All agents share state via a plan file at `docs/plans/<feature-name>.md`:
 
 | Model | Agents | Rationale |
 |-------|--------|-----------|
-| Opus | Planning agents | Better architectural decisions |
-| Sonnet | Implementation agents | Balanced speed and quality |
-| Haiku | Build verification | Fast mechanical work |
+| Opus | @swift-architect, @swift-ui-design, @tca-architect | Best reasoning for architecture decisions |
+| Inherit | Implementation agents (engineer, test, review, modernizer, docs) | Balanced quality and cost (uses parent session model) |
+| Haiku | @search, @swift-documenter | Fast, efficient for mechanical tasks |
 
 ## Quality Assurance
 
@@ -341,9 +403,34 @@ All agents share state via a plan file at `docs/plans/<feature-name>.md`:
 
 When modifying agents or skills:
 
-- [ ] All agents have `name`, `description`, `color`, `tools`, `model` fields
+- [ ] All agents have `name`, `description`, `tools`, `model` fields
 - [ ] Planning agents (`@swift-architect`, `@swift-ui-design`, `@tca-architect`) are Opus
-- [ ] Implementation agents are Sonnet (except `@search` which is Haiku)
+- [ ] Implementation agents use Inherit (allows cost-effective scaling with session model)
+- [ ] Utility agents (`@search`, `@swift-documenter`) are Haiku
 - [ ] Planning agents have explicit no-modify constraints
 - [ ] All handoffs are documented in Agent Handoff Model
 - [ ] All skill references exist in `skills/` directory
+
+## Contributing
+
+Contributions are welcome! Areas of focus:
+
+- **New agents** — Specialized agents for underserved tasks
+- **Skill enhancements** — Additional frameworks, patterns, or design guidance
+- **Bug fixes** — Issues, regressions, or edge cases in existing agents
+- **Documentation** — Clarity, examples, or new guides
+- **Testing** — Verify agent workflows work end-to-end
+
+Please ensure:
+- Agents follow the established [specification](#agents)
+- Skills adhere to [writing-skills best practices](https://github.com/anthropics/claude-code/blob/main/docs/skills.md)
+- Changes are tested with actual Swift projects
+- Documentation is updated
+
+## License
+
+This plugin is available under the MIT License. See [LICENSE](LICENSE) file for details.
+
+## Feedback
+
+Report issues or suggest features at the [GitHub repository](https://github.com/johnrogers/claude-swift-engineering/issues).

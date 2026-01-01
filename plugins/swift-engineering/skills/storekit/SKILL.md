@@ -1,6 +1,6 @@
 ---
 name: storekit
-description: Use when implementing in-app purchases, StoreKit 2 subscriptions, consumables, non-consumables, or transaction handling. Covers testing-first workflow with .storekit configuration, StoreManager architecture, ProductView/SubscriptionStoreView, transaction verification, and restore purchases.
+description: Use when implementing in-app purchases, StoreKit 2 subscriptions, consumables, non-consumables, or transaction handling. Covers testing-first workflow with .storekit configuration, StoreManager architecture, and transaction verification.
 ---
 
 # StoreKit
@@ -41,3 +41,15 @@ final class StoreManager: ObservableObject {
     }
 }
 ```
+
+## Common Mistakes
+
+1. **Missing `.finish()` calls on transactions** — Forgetting to call `transaction.finish()` after granting entitlements causes transactions to never complete. The user won't see their purchase reflected. Always call `finish()`.
+
+2. **Unsafe StoreManager state** — Shared `StoreManager` without `@MainActor` can have race conditions. Multiple async tasks can update `@Published` properties concurrently, corrupting state. Use `@MainActor` for thread safety.
+
+3. **No transaction listener at app launch** — Not setting up `Transaction.updates` listener means app crashes or misses refunded/canceled purchases. Listen for transactions immediately in `@main`, not when user taps purchase button.
+
+4. **Hardcoded product IDs** — Hardcoded IDs make testing and localization hard. Use configuration files or environment variables for product IDs. Same applies to prices (fetch from App Store, don't hardcode).
+
+5. **Ignoring verification failures** — App Store verification fails silently sometimes. Not checking verification status means accepting unverified transactions (security risk). Always verify before granting entitlements.

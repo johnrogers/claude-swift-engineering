@@ -39,3 +39,15 @@ Advanced SwiftUI patterns for gesture composition, adaptive layouts, architectur
 - Small app, Apple patterns? -> @Observable + State-as-Bridge
 - Complex presentation logic? -> MVVM with @Observable
 - Rigorous testability needed? -> TCA
+
+## Common Mistakes
+
+1. **Gesture composition order matters** — `.simultaneously` and `.sequenced` have different trigger timing. Swapping them silently changes behavior. Understand gesture semantics before using.
+
+2. **ViewThatFits over-used** — ViewThatFits remeasures on every view change. For animated H/V switches, use `AnyLayout` instead. Use ViewThatFits only for static variant selection.
+
+3. **onGeometryChange triggering unnecessary updates** — Reading geometry changes geometry, which triggers updates, which changes geometry... circular. Use `.onGeometryChange` only with proper state management to avoid loops.
+
+4. **Architecture mismatch mid-project** — Starting with @Observable + State-as-Bridge then realizing you need TCA is expensive. Choose architecture upfront based on complexity (small app = @Observable, complex = TCA).
+
+5. **Ignoring view body optimization** — Computing expensive calculations in view body repeatedly kills performance. Move calculations to properties or models. Profile with Instruments 26 before optimizing prematurely.

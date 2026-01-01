@@ -1,11 +1,15 @@
 ---
 name: swift-testing
-description: Swift Testing framework patterns and best practices. Use when writing tests with Swift Testing (@Test, #expect, #require), migrating from XCTest, or implementing async tests and parameterized tests.
+description: Use when writing tests with Swift Testing (@Test, #expect, #require), migrating from XCTest, implementing async tests, or parameterizing tests.
 ---
 
 # Swift Testing Framework
 
 Modern testing with Swift Testing framework. No XCTest.
+
+## Overview
+
+Swift Testing replaces XCTest with a modern macro-based approach that's more concise, has better async support, and runs tests in parallel by default. The core principle: if you learned XCTest, unlearn it—Swift Testing works differently.
 
 ## References
 
@@ -122,3 +126,17 @@ func testNetworkCall() { }
 2. **Forgetting state isolation** — Each test gets a NEW instance
 3. **Accidental Cartesian product** — Always use `zip` for paired inputs
 4. **Not using `.serialized`** — Apply for thread-unsafe legacy tests
+
+## Common Mistakes
+
+1. **Overusing `#require`** — `#require` is for preconditions only. Using it for normal assertions means the test stops at first failure instead of reporting all failures. Use `#expect` for assertions, `#require` only when subsequent assertions depend on the value.
+
+2. **Cartesian product bugs** — `@Test(arguments: [a, b], [c, d])` creates 4 combinations, not 2. Always use `zip` to pair arguments correctly: `arguments: zip([a, b], [c, d])`.
+
+3. **Forgetting state isolation** — Swift Testing creates a new test instance per test method. BUT shared state between tests (static variables, singletons) still leak. Use dependency injection or clean up singletons between tests.
+
+4. **Parallel test conflicts** — Swift Testing runs tests in parallel by default. Tests touching shared files, databases, or singletons will interfere. Use `.serialized` or isolation strategies.
+
+5. **Not using `async` naturally** — Wrapping async operations in `Task { }` defeats the purpose. Use `async/await` directly in test function signature: `@Test func testAsync() async throws { }`.
+
+6. **Confirmation misuse** — `confirmation` is for verifying callbacks were called. Using it for assertions is wrong. Use `#expect` for assertions, `confirmation` for callback counts.

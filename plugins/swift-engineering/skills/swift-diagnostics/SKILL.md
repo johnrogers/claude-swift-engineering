@@ -34,3 +34,15 @@ Systematic debugging workflows for iOS/macOS development. These patterns help id
 - Performance: Environment problems, not code bugs
 
 Diagnose systematically. Never guess.
+
+## Common Mistakes
+
+1. **Skipping mandatory first checks** — Jumping straight to code changes before running diagnostics (clean build, restart simulator, restart Xcode) means you'll chase ghosts. Always start with the mandatory checks.
+
+2. **Changing multiple things at once** — "Let me delete DerivedData AND restart simulator AND kill Xcode" means you can't isolate which fix actually worked. Change one variable at a time.
+
+3. **Assuming you know the cause** — "NavigationStack stopped working, must be my reducer" — actually it was stale DerivedData. Diagnostic trees prevent assumptions. Follow the tree, don't guess.
+
+4. **Missing memory basics** — Calling `deinit` not being called is a retain cycle, but beginners often blame architecture. Use Instruments to verify leaks before refactoring. Data, not intuition.
+
+5. **Not isolating the problem** — Testing with your whole app complicates diagnosis. Create a minimal reproducible example with just the problematic feature. Isolation reveals root causes.
