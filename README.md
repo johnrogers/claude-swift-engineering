@@ -13,7 +13,6 @@ The **swift-engineering plugin** is a production-ready toolkit for professional 
 - **12 Ultra-Specialized Agents** — Planning (Opus), implementation (Inherit), utilities (Haiku) with clear handoffs
 - **TCA Support** — Full workflow from architecture design to testing for The Composable Architecture
 - **Modern Swift 6.2** — iOS 26+ with strict concurrency, async/await, actors, Sendable
-- **End-to-End Workflows** — Plan → Implement → Test → Review → Document
 - **Code Quality** — Integrated code review, accessibility compliance, and performance checks
 - **Knowledge Skills** — 18 specialized knowledge bases covering architecture patterns, frameworks, design, and development tools
 
