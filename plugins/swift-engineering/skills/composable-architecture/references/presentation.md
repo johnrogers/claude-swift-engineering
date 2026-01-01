@@ -4,6 +4,91 @@ Patterns for managing presentation state in TCA (navigation destinations, alerts
 
 ## Destination Management
 
+### Unified Destination Pattern (Recommended)
+
+Use a **single `@Presents var destination: Destination.State?` property** to manage all presentation cases (sheets, alerts, navigation). This pattern provides better type safety, cleaner state management, and simpler reducer composition.
+
+**Benefits:**
+- ✅ Type-safe: Compiler ensures all presentation cases are handled
+- ✅ Mutually exclusive: Only one presentation can be active at a time
+- ✅ Simpler composition: One `ifLet` instead of multiple properties
+- ✅ Clearer code: All navigation flows in a single enum
+
+**When to use:** Default choice for any feature with multiple presentation types.
+
+```swift
+@Reducer
+struct Feature {
+    @Reducer
+    enum Destination {
+        case sheet(SheetFeature)
+        case dialog(ConfirmationDialog)
+        case navigationDrill(DetailFeature)
+    }
+
+    @ObservableState
+    struct State: Equatable {
+        @Presents var destination: Destination.State?  // ← Single source of truth
+    }
+
+    enum Action {
+        case destination(PresentationAction<Destination.Action>)
+        case view(ViewAction)
+        case delegate(DelegateAction)
+    }
+
+    enum ViewAction {
+        case showSheet
+        case showDialog
+        case showDetail
+    }
+
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case .view(.showSheet):
+                state.destination = .sheet(SheetFeature.State())
+                return .none
+
+            case .view(.showDialog):
+                state.destination = .dialog(ConfirmationDialog.State())
+                return .none
+
+            case .view(.showDetail):
+                state.destination = .navigationDrill(DetailFeature.State())
+                return .none
+
+            case .destination:
+                return .none
+            }
+        }
+        .ifLet(\.$destination, action: \.destination)  // ← Single composition point
+    }
+}
+```
+
+### Avoid: Multiple `@Presents` Properties
+
+❌ **Don't do this:** Separate `@Presents` properties for each destination
+
+```swift
+// ❌ Avoid this pattern
+struct BadState {
+    @Presents var sheetDestination: SheetFeature.State?
+    @Presents var alertDestination: AlertState<AlertAction>?
+    @Presents var navigationDestination: DetailFeature.State?
+    // Multiple properties = complexity, harder to test
+}
+```
+
+Multiple properties lead to:
+- ✗ State complexity: Managing multiple presentation states
+- ✗ Testing burden: Verifying combinations of properties
+- ✗ Error-prone: Easy to show multiple presentations simultaneously
+- ✗ Reducer clutter: Multiple `ifLet` chains
+
+### Basic Destination Management
+
 ```swift
 @Reducer(state: .equatable)
 public enum Destination {
