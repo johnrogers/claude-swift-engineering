@@ -2,6 +2,45 @@
 
 Systematic debugging for SPM resolution, "No such module", and dependency conflicts. 80% of persistent build failures are dependency resolution issues, not code bugs.
 
+## CRITICAL: iOS Package Builds
+
+**iOS-only packages (using UIKit, SwiftUI with iOS APIs) CANNOT be built with `swift build`.**
+
+```bash
+# ❌ WRONG: swift build uses macOS SDK — will fail with "No such module 'UIKit'"
+swift build
+
+# ✅ CORRECT: Use xcodebuild for iOS packages
+xcodebuild -scheme PackageName -destination 'generic/platform=iOS Simulator' build
+
+# ✅ For testing
+xcodebuild -scheme PackageName -destination 'platform=iOS Simulator,id=DEVICE_UUID' test
+```
+
+**Do NOT add macOS platform support just to make `swift build` work.** This masks the real issue and causes UIKit/iOS-only API errors.
+
+## Swift Tools Version
+
+**Always check specs/proposals for the exact swift-tools-version required.**
+
+```swift
+// swift-tools-version:6.2  ← Use exact version from spec
+
+// ❌ WRONG: Adding swiftSettings when tools-version already implies it
+.target(
+    name: "MyTarget",
+    swiftSettings: [.swiftLanguageMode(.v6)]  // Unnecessary with 6.2
+)
+
+// ✅ CORRECT: Swift 6.2 tools-version implies Swift 6 language mode
+.target(name: "MyTarget")
+```
+
+**Rules:**
+- Swift tools-version 6.2 implies Swift 6 language mode — no extra settings needed
+- Do not use 6.0 when 6.2 is specified — they are different
+- Check Package.swift comments or proposal docs for required version
+
 ## Diagnostic Decision Table
 
 | Error | Likely Cause | First Check |

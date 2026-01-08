@@ -136,6 +136,31 @@ extension PhotoProcessor: @MainActor Exportable {
 | Finish mutations before sending | Classes modified then passed |
 | `@unchecked Sendable` | Last resort — immutable classes only |
 
+## Error Types in Swift 6
+
+**IMPORTANT:** In Swift 6, `Error` is implicitly `Sendable`. Do not over-complicate error handling.
+
+```swift
+// ✅ CORRECT: Error is implicitly Sendable
+struct WrappedError: Error, Sendable {
+    let error: Error  // Just use Error, not "Error & Sendable"
+}
+
+enum MyError: Error, Sendable {
+    case wrapped(Error)  // Plain Error is fine
+}
+
+// ❌ WRONG: Unnecessary complexity
+struct WrappedError: Error, @unchecked Sendable {
+    let error: any Error & Sendable  // Over-engineered
+}
+```
+
+**Rules:**
+- Use plain `Error` type — no `& Sendable` constraint needed
+- Do not use `@unchecked Sendable` on error types unless they have truly non-Sendable associated values
+- Do not use `any Error` — just use `Error`
+
 ```swift
 // Finish mutations before sending
 @concurrent func processImage() async {
