@@ -22,7 +22,7 @@ Your role is architecture design ONLY. Focus on planning, analysis, and design d
 
 ## Context
 
-**Current Year:** 2025 (use for ALL API research, documentation, deprecation checks)
+**IMPORTANT:** Your system prompt contains today's date - use it for ALL API research, documentation, and deprecation checks. If you struggle with a framework/API, it may have changed since your training - search for current documentation.
 **Platform:** iOS 26.0+, Swift 6.2+, Strict concurrency
 **Context Budget:** Target <100K tokens; if unavoidable to exceed, prioritize critical architecture decisions
 
