@@ -167,3 +167,53 @@ struct State: Equatable {
     @Shared(.stats) var stats = Stats()                         // In-memory
 }
 ```
+
+## Accessing @Shared Inside Effects and Static Functions
+
+**Key Pattern:** `@Shared` can be declared directly inside async functions and effects — no need to pass them as parameters.
+
+### ❌ Bad: Passing @Shared as Parameter
+
+```swift
+// Overly complex - requires capturing state in closure
+static func enableFeature(
+    featureEnabled: Shared<Bool>,
+    itemId: UUID?
+) async throws {
+    featureEnabled.withLock { $0 = true }
+    // ...
+}
+
+// Caller must capture state
+case .enableTapped:
+    return .run { [featureEnabled = state.$featureEnabled] _ in
+        try await FeatureHelper.enableFeature(
+            featureEnabled: featureEnabled,
+            itemId: itemId
+        )
+    }
+```
+
+### ✅ Good: Access @Shared Directly Inside Function
+
+```swift
+// Cleaner - function is self-contained
+static func enableFeature(itemId: UUID?) async throws {
+    @Shared(.appStorage("featureEnabled")) var featureEnabled
+    $featureEnabled.withLock { $0 = true }
+    // ...
+}
+
+// Caller is simple
+case .enableTapped:
+    return .run { _ in
+        try await FeatureHelper.enableFeature(itemId: itemId)
+    }
+```
+
+### Why This Works
+
+- `@Shared` properties can be declared anywhere, not just in State structs
+- The property wrapper handles shared state access automatically
+- Keeps function signatures clean
+- Avoids the need to capture `state.$property` in effect closures

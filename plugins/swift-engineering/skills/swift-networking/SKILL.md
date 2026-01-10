@@ -7,12 +7,14 @@ description: Use when implementing Network.framework connections (NWConnection, 
 
 Network.framework is Apple's modern networking API for TCP/UDP connections, replacing BSD sockets with smart connection establishment, user-space networking, and seamless mobility handling.
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|
 | **[Getting Started](references/getting-started.md)** | Setting up NWConnection for TCP/UDP, choosing between APIs |
-| **[Connection States](references/connection-states.md)** | Handling .waiting, .ready, .failed transitions |
+| **[Connection States](references/connection-states.md)** | Handling `.waiting`, `.ready`, `.failed` transitions |
 | **[iOS 26+ Networking](references/ios26-networking.md)** | Using NetworkConnection with async/await, TLV framing, Coder protocol |
 | **[Migration Guide](references/migration.md)** | Moving from sockets, CFSocket, SCNetworkReachability, URLSession |
 | **[Troubleshooting](references/troubleshooting.md)** | Debugging timeouts, TLS failures, connection issues |

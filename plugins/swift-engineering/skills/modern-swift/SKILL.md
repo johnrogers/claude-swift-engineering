@@ -30,17 +30,20 @@ When writing async Swift code:
 4. Check `Task.isCancelled` or call `Task.checkCancellation()` in loops
 5. Enable strict concurrency in Package.swift for compile-time safety
 
-## References
+## Reference Loading Guide
 
-Load these based on what you need:
-- **[Concurrency Essentials](references/concurrency-essentials.md)** — Load when writing new async code or converting completion handlers
-- **[Swift 6 Concurrency](references/swift6-concurrency.md)** — Load when using @concurrent, nonisolated(unsafe), or actor patterns
-- **[Task Groups](references/task-groups.md)** — Load when running multiple async operations in parallel
-- **[Task Cancellation](references/task-cancellation.md)** — Load when implementing long-running or cancellable operations
-- **[Strict Concurrency](references/strict-concurrency.md)** — Load when enabling Swift 6 strict mode or fixing Sendable errors
-- **[Macros](references/macros.md)** — Load when using or understanding Swift macros like @Observable
-- **[Modern Attributes](references/modern-attributes.md)** — Load when migrating legacy code or using @preconcurrency, @backDeployed
-- **[Migration Patterns](references/migration-patterns.md)** — Load when modernizing delegate patterns or UIKit views
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
+
+| Reference | Load When |
+|-----------|-----------|
+| **[Concurrency Essentials](references/concurrency-essentials.md)** | Writing async code, converting completion handlers, using `await` |
+| **[Swift 6 Concurrency](references/swift6-concurrency.md)** | Using `@concurrent`, `nonisolated(unsafe)`, or actor patterns |
+| **[Task Groups](references/task-groups.md)** | Running multiple async operations in parallel |
+| **[Task Cancellation](references/task-cancellation.md)** | Implementing long-running or cancellable operations |
+| **[Strict Concurrency](references/strict-concurrency.md)** | Enabling Swift 6 strict mode or fixing Sendable errors |
+| **[Macros](references/macros.md)** | Using or understanding Swift macros like `@Observable` |
+| **[Modern Attributes](references/modern-attributes.md)** | Migrating legacy code or using `@preconcurrency`, `@backDeployed` |
+| **[Migration Patterns](references/migration-patterns.md)** | Modernizing delegate patterns or UIKit views |
 
 ## Common Mistakes
 

@@ -7,22 +7,25 @@ description: Use when working with SQLiteData library (@Table, @FetchAll, @Fetch
 
 SQLiteData provides type-safe SQLite access through Swift macros, simplifying database modeling and queries while handling CloudKit sync, migrations, and async patterns automatically.
 
-## Overview
+## Reference Loading Guide
 
-## Quick Reference
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|
-| **[Table Models](references/models.md)** | Defining database tables with `@Table` macro, setting up primary keys, columns, or enums |
-| **[Queries](references/queries.md)** | Using `@FetchAll`, `@FetchOne`, `@Fetch` property wrappers, or building queries with joins/filters |
-| **[Writes](references/writes.md)** | Inserting, updating, upserting, or deleting records; managing transactions |
-| **[Views](references/views.md)** | Integrating `@FetchAll`/`@FetchOne` with SwiftUI views, `@Observable` models, UIKit, or TCA `@ObservableState` |
-| **[Migrations](references/migrations.md)** | Creating database migrations with DatabaseMigrator or `#sql()` macro |
+| **[Table Models](references/models.md)** | Defining tables with `@Table`, setting up primary keys, columns, or enums |
+| **[Queries - Basics](references/queries-basics.md)** | Using `@FetchAll`, `@FetchOne`, `@Selection`, filtering, ordering, or joins |
+| **[Queries - Advanced](references/queries-advanced.md)** | Using `@Fetch` with `FetchKeyRequest`, dynamic queries, recursive CTEs, or direct reads |
+| **[Writes](references/writes.md)** | Inserting, updating, upserting, deleting records, or managing transactions |
+| **[Views - SwiftUI](references/views-swiftui.md)** | Using `@FetchAll`/`@FetchOne` in SwiftUI views, `@Observable` models, or animations |
+| **[Views - Integration](references/views-integration.md)** | UIKit integration, dynamic query loading, TCA integration, or `observe {}` |
+| **[Migrations](references/migrations.md)** | Creating database migrations with `DatabaseMigrator` or `#sql()` macro |
 | **[CloudKit Sync](references/cloudkit.md)** | Setting up CloudKit private database sync, sharing, or sync delegates |
 | **[Dependencies](references/dependencies.md)** | Injecting database/sync engine via `@Dependency`, bootstrap patterns, or TCA integration |
 | **[Testing](references/testing.md)** | Setting up test databases, seeding data, or writing assertions for SQLite code |
-| **[Advanced](references/advanced.md)** | Implementing triggers, full-text search (FTS5), or custom database functions |
-| **[Schema Composition](references/schema-composition.md)** | Using @Selection column groups, single-table inheritance, or database views |
+| **[Advanced - Queries](references/advanced-queries.md)** | Implementing triggers, custom database functions, or full-text search (FTS5) |
+| **[Advanced - Optimization](references/advanced-optimization.md)** | Performance tuning, indexes, custom aggregates, JSON aggregation, or self-joins |
+| **[Schema Composition](references/schema-composition.md)** | Using `@Selection` column groups, single-table inheritance, or database views |
 
 ## Core Workflow
 

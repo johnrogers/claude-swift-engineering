@@ -30,22 +30,24 @@ SwiftUI 17+ removes ObservableObject boilerplate with @Observable, simplifies en
 4. Use `NavigationStack` with `NavigationPath` for programmatic navigation
 5. Apply `.accessibilityLabel()` and `.accessibilityHint()` to interactive elements
 
-## References
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|
-| [observable.md](references/observable.md) | Creating new @Observable model classes |
-| [state-management.md](references/state-management.md) | Deciding between @State, @Bindable, @Environment |
-| [environment.md](references/environment.md) | Injecting dependencies into view hierarchy |
-| [view-modifiers.md](references/view-modifiers.md) | Using onChange, task, or iOS 17+ modifiers |
-| [migration-guide.md](references/migration-guide.md) | Updating iOS 16 code to iOS 17+ |
-| [mvvm-observable.md](references/mvvm-observable.md) | Setting up view model architecture |
-| [navigation.md](references/navigation.md) | Programmatic or deep-link navigation |
-| [performance.md](references/performance.md) | Lists with 100+ items or excessive re-renders |
-| [uikit-interop.md](references/uikit-interop.md) | Wrapping UIKit components (WKWebView, PHPicker) |
-| [accessibility.md](references/accessibility.md) | VoiceOver, Dynamic Type, accessibility actions |
-| [async-patterns.md](references/async-patterns.md) | Loading states, refresh, background tasks |
-| [composition.md](references/composition.md) | Reusable view modifiers or complex conditional UI |
+| **[Observable](references/observable.md)** | Creating new `@Observable` model classes |
+| **[State Management](references/state-management.md)** | Deciding between `@State`, `@Bindable`, `@Environment` |
+| **[Environment](references/environment.md)** | Injecting dependencies into view hierarchy |
+| **[View Modifiers](references/view-modifiers.md)** | Using `onChange`, `task`, or iOS 17+ modifiers |
+| **[Migration Guide](references/migration-guide.md)** | Updating iOS 16 code to iOS 17+ |
+| **[MVVM Observable](references/mvvm-observable.md)** | Setting up view model architecture |
+| **[Navigation](references/navigation.md)** | Programmatic or deep-link navigation |
+| **[Performance](references/performance.md)** | Lists with 100+ items or excessive re-renders |
+| **[UIKit Interop](references/uikit-interop.md)** | Wrapping UIKit components (WKWebView, PHPicker) |
+| **[Accessibility](references/accessibility.md)** | VoiceOver, Dynamic Type, accessibility actions |
+| **[Async Patterns](references/async-patterns.md)** | Loading states, refresh, background tasks |
+| **[Composition](references/composition.md)** | Reusable view modifiers or complex conditional UI |
 
 ## Common Mistakes
 

@@ -7,17 +7,26 @@ description: Use when building features with TCA (The Composable Architecture), 
 
 TCA provides architecture for building complex, testable features through composable reducers, centralized state management, and side effect handling. The core principle: predictable state evolution with clear dependencies and testable effects.
 
-## Overview
+## Reference Loading Guide
 
-- **[Reducer Structure](references/reducer-structure.md)** - Templates, @Reducer, State, Actions, @ViewAction, conformances
-- **[Views](references/views.md)** - StoreOf, @Bindable, ForEach, store.scope, view actions
-- **[Navigation](references/navigation.md)** - NavigationStack, StackState, path reducers, dismiss
-- **[Shared State](references/shared-state.md)** - @Shared, .appStorage, .withLock, FileStorageKey, InMemoryKey
-- **[Dependencies](references/dependencies.md)** - @DependencyClient, @Dependency, DependencyKey, streaming
-- **[Effects](references/effects.md)** - .run, .send, .merge, catch:, timers, cancellation
-- **[Presentation](references/presentation.md)** - @Presents, Scope, AlertState, multiple destinations
-- **[Testing](references/testing.md)** - TestStore, TestClock, exhaustivity, dependency mocking
-- **[Performance](references/performance.md)** - Optimization, high-frequency updates, memory
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
+
+| Reference | Load When |
+|-----------|-----------|
+| **[Reducer Structure](references/reducer-structure.md)** | Creating new reducers, setting up `@Reducer`, `State`, `Action`, or `@ViewAction` |
+| **[Views - Binding](references/views-binding.md)** | Using `@Bindable`, two-way bindings, `store.send()`, or `.onAppear`/`.task` |
+| **[Views - Composition](references/views-composition.md)** | Using `ForEach` with stores, scoping to child features, or optional children |
+| **[Navigation - Basics](references/navigation-basics.md)** | Setting up `NavigationStack`, path reducers, pushing/popping, or programmatic dismiss |
+| **[Navigation - Advanced](references/navigation-advanced.md)** | Deep linking, recursive navigation, or combining NavigationStack with sheets |
+| **[Shared State](references/shared-state.md)** | Using `@Shared`, `.appStorage`, `.withLock`, or sharing state between features |
+| **[Dependencies](references/dependencies.md)** | Creating `@DependencyClient`, using `@Dependency`, or setting up test dependencies |
+| **[Effects](references/effects.md)** | Using `.run`, `.send`, `.merge`, timers, effect cancellation, or async work |
+| **[Presentation](references/presentation.md)** | Using `@Presents`, `AlertState`, sheets, popovers, or the Destination pattern |
+| **[Testing - Fundamentals](references/testing-fundamentals.md)** | Setting up test suites, `makeStore` helpers, or understanding Equatable requirements |
+| **[Testing - Patterns](references/testing-patterns.md)** | Testing actions, state changes, dependencies, errors, or presentations |
+| **[Testing - Advanced](references/testing-advanced.md)** | Using `TestClock`, keypath matching, `exhaustivity = .off`, or time-based tests |
+| **[Testing - Utilities](references/testing-utilities.md)** | Test data factories, `LockIsolated`, `ConfirmationDialogState` testing, or `@Shared` testing |
+| **[Performance](references/performance.md)** | Optimizing state updates, high-frequency actions, memory, or store scoping |
 
 ## Common Mistakes
 

@@ -11,12 +11,14 @@ Apple's on-device AI framework providing access to a 3B parameter language model
 
 Foundation Models enable intelligent text processing directly on device without server round-trips, user data sharing, or network dependencies. The core principle: leverage on-device AI for specific, contained tasks (not for general knowledge).
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|
 | **[Getting Started](references/getting-started.md)** | Setting up LanguageModelSession, checking availability, basic prompts |
-| **[Structured Output](references/structured-output.md)** | Using @Generable for type-safe responses, @Guide constraints |
+| **[Structured Output](references/structured-output.md)** | Using `@Generable` for type-safe responses, `@Guide` constraints |
 | **[Tool Calling](references/tool-calling.md)** | Integrating external data (weather, contacts, MapKit) via Tool protocol |
 | **[Streaming](references/streaming.md)** | AsyncSequence for progressive UI updates, PartiallyGenerated types |
 | **[Troubleshooting](references/troubleshooting.md)** | Context overflow, guardrails, errors, anti-patterns |

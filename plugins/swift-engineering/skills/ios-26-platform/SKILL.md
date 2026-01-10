@@ -11,13 +11,15 @@ iOS 26 introduces Liquid Glass, Apple's next-generation material design system t
 
 iOS 26 modernizes UI with new materials (Liquid Glass), SwiftUI APIs (WebView, Chart3D, @Animatable), and advanced features (@BackoffAnimation, free-form windows). The core principle: modern UI gets updated automatically at compile time; most Liquid Glass benefits are "free" from recompiling with Xcode 26.
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|
 | **[Liquid Glass](references/liquid-glass.md)** | Implementing glass effects, choosing Regular vs Clear variants, or understanding visual properties |
 | **[Automatic Adoption](references/automatic-adoption.md)** | Understanding what iOS 26 changes automatically vs what requires code |
-| **[SwiftUI APIs](references/swiftui-apis.md)** | Using WebView, Chart3D, @Animatable, AttributedString, or new view modifiers |
+| **[SwiftUI APIs](references/swiftui-apis.md)** | Using WebView, Chart3D, `@Animatable`, AttributedString, or new view modifiers |
 | **[Toolbar & Navigation](references/toolbar-navigation.md)** | Customizing toolbars with spacers, morphing, glass button styles, or search |
 | **[Backward Compatibility](references/backward-compat.md)** | Supporting iOS 17/18 alongside iOS 26, or using UIDesignRequiresCompatibility |
 

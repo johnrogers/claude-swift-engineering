@@ -7,7 +7,9 @@ description: Use when implementing gesture composition (simultaneous, sequenced,
 
 Advanced SwiftUI patterns for gesture composition, adaptive layouts, architecture decisions, and performance optimization.
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|

@@ -7,15 +7,19 @@ description: Use when designing iOS interfaces, implementing accessibility (Voic
 
 Apple's Human Interface Guidelines define the visual language, interaction patterns, and accessibility standards that make iOS apps feel native and intuitive. The core principle: clarity and consistency through thoughtful design.
 
-## Overview
+## Reference Loading Guide
 
-- **[Interaction](references/interaction.md)** - Touch targets, navigation, layout, hierarchy
-- **[Content](references/content.md)** - Empty states, writing copy, typography
-- **[Visual Design](references/visual-design.md)** - Colors, materials, contrast, dark mode
-- **[Accessibility](references/accessibility.md)** - VoiceOver, Dynamic Type, Reduce Motion
-- **[Feedback](references/feedback.md)** - Animations, haptics, loading states, errors
-- **[Performance](references/performance-platform.md)** - Responsiveness, system components
-- **[Privacy](references/privacy-permissions.md)** - Permission requests, data handling
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
+
+| Reference | Load When |
+|-----------|-----------|
+| **[Interaction](references/interaction.md)** | Touch targets, navigation, layout, hierarchy, or gesture patterns |
+| **[Content](references/content.md)** | Empty states, writing copy, typography, or placeholder text |
+| **[Visual Design](references/visual-design.md)** | Colors, materials, contrast, dark mode, or SF Symbols |
+| **[Accessibility](references/accessibility.md)** | VoiceOver, Dynamic Type, Reduce Motion, or accessibility labels |
+| **[Feedback](references/feedback.md)** | Animations, haptics, loading states, or error messages |
+| **[Performance](references/performance-platform.md)** | Responsiveness, system components, or app launch |
+| **[Privacy](references/privacy-permissions.md)** | Permission requests, data handling, or privacy-sensitive APIs |
 
 ## Common Mistakes
 

@@ -11,7 +11,9 @@ Haptic feedback provides tactile confirmation of user actions and system events.
 
 Haptics should enhance interactions, not dominate them. The core principle: haptic feedback is like sound design—every haptic should have purpose (confirmation, error, warning), timing (immediate or delayed), and restraint (less is more).
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|

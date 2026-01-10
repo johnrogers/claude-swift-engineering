@@ -7,12 +7,14 @@ description: Use when implementing in-app purchases, StoreKit 2 subscriptions, c
 
 StoreKit 2 patterns for implementing in-app purchases with async/await APIs, automatic verification, and SwiftUI integration.
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|
-| **[Getting Started](references/getting-started.md)** | Setting up .storekit configuration file, testing-first workflow |
-| **[Products](references/products.md)** | Loading products, product types, purchasing with Product.purchase() |
+| **[Getting Started](references/getting-started.md)** | Setting up `.storekit` configuration file, testing-first workflow |
+| **[Products](references/products.md)** | Loading products, product types, purchasing with `Product.purchase()` |
 | **[Subscriptions](references/subscriptions.md)** | Auto-renewable subscriptions, subscription groups, offers, renewal tracking |
 | **[Transactions](references/transactions.md)** | Transaction listener, verification, finishing transactions, restore purchases |
 | **[StoreKit Views](references/storekit-views.md)** | ProductView, SubscriptionStoreView, SubscriptionOfferView in SwiftUI |

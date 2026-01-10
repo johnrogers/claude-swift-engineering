@@ -7,7 +7,9 @@ description: Use when implementing internationalization (i18n), String Catalogs,
 
 Modern iOS localization using String Catalogs (.xcstrings) for managing translations, plural forms, and locale-aware content. Supports SwiftUI's LocalizedStringKey and String(localized:) APIs.
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|

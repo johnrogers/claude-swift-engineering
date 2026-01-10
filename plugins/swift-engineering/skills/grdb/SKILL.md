@@ -7,7 +7,9 @@ description: Use when writing raw SQL with GRDB, complex joins across 4+ tables,
 
 Direct SQLite access using [GRDB.swift](https://github.com/groue/GRDB.swift) - type-safe Swift wrapper with full SQLite power when you need it.
 
-## Quick Reference
+## Reference Loading Guide
+
+**ALWAYS load reference files if there is even a small chance the content may be required.** It's better to have the context than to miss a pattern or make a mistake.
 
 | Reference | Load When |
 |-----------|-----------|
