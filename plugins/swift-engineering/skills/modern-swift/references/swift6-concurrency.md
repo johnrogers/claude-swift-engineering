@@ -75,6 +75,35 @@ class LegacyCache {
 
 **Consider first:** Make it an `actor`, add `@MainActor`, or use `@unchecked Sendable`.
 
+### Static Comparators Pattern
+
+For static sorting comparators, prefer `static let` with `@Sendable` closures over `nonisolated(unsafe) static var`:
+
+```swift
+// ❌ Before: Requires nonisolated(unsafe)
+extension SortableItem {
+    nonisolated(unsafe) static var dateAscending: (SortableItem, SortableItem) -> Bool = { lhs, rhs in
+        lhs.date < rhs.date
+    }
+}
+
+// ✅ After: Use static let with @Sendable
+extension SortableItem {
+    static let dateAscending: @Sendable (SortableItem, SortableItem) -> Bool = { lhs, rhs in
+        lhs.date < rhs.date
+    }
+
+    static let priorityDescending: @Sendable (SortableItem, SortableItem) -> Bool = { lhs, rhs in
+        lhs.priority > rhs.priority
+    }
+}
+
+// Usage — works with standard library sorting
+let sorted = items.sorted(by: SortableItem.dateAscending)
+```
+
+**Why this works:** `static let` closures are evaluated once and immutable. Adding `@Sendable` proves they capture no mutable state.
+
 ## Actor for Main Actor Contention
 
 ```swift

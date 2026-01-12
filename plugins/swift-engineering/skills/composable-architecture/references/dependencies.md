@@ -4,7 +4,32 @@ Patterns for dependency injection in TCA.
 
 ## @DependencyClient Macro
 
-Use `@DependencyClient` to declare dependency clients with automatic test value generation:
+Use `@DependencyClient` to declare dependency clients with automatic test value generation.
+
+### Benefits for Swift 6 Strict Concurrency
+
+`@DependencyClient` eliminates the need for manual `unimplemented` static properties, which require `nonisolated(unsafe)` in Swift 6:
+
+```swift
+// ❌ Before: Manual unimplemented pattern (requires workaround)
+struct LegacyClient: Sendable {
+    var fetchData: @Sendable () async throws -> Data
+
+    // nonisolated(unsafe) required in Swift 6 — fragile
+    nonisolated(unsafe) static var unimplemented = LegacyClient(
+        fetchData: { fatalError("unimplemented") }
+    )
+}
+
+// ✅ After: @DependencyClient handles it automatically
+@DependencyClient
+struct ModernClient: Sendable {
+    var fetchData: @Sendable () async throws -> Data
+}
+// testValue auto-generated, no nonisolated(unsafe) needed
+```
+
+### Basic Example
 
 ```swift
 @DependencyClient
@@ -43,6 +68,39 @@ extension DependencyValues {
 ```
 
 The `@DependencyClient` macro automatically generates a `.testValue` that throws `unimplemented` errors, catching untested code paths.
+
+### WrappedError Pattern for Typed Errors
+
+When dependency clients need typed errors with `Equatable` conformance, wrap `Swift.Error`:
+
+```swift
+@DependencyClient
+struct DataClient: Sendable {
+    enum Error: Swift.Error, Equatable, CustomDebugStringConvertible, Sendable {
+        struct WrappedError: Swift.Error, Equatable, Sendable {
+            let error: Swift.Error
+            var localizedDescription: String { error.localizedDescription }
+            static func == (lhs: Self, rhs: Self) -> Bool {
+                lhs.localizedDescription == rhs.localizedDescription
+            }
+        }
+
+        case networkError(WrappedError)
+        case decodingError(WrappedError)
+
+        var debugDescription: String {
+            switch self {
+            case .networkError(let e): return "Network: \(e.localizedDescription)"
+            case .decodingError(let e): return "Decoding: \(e.localizedDescription)"
+            }
+        }
+    }
+
+    var fetchData: @Sendable () async throws(Error) -> Data
+}
+```
+
+**Note:** `Swift.Error` is implicitly `Sendable`, so `WrappedError` uses plain `Sendable`, not `@unchecked Sendable`.
 
 ## Using Dependencies in Reducers
 

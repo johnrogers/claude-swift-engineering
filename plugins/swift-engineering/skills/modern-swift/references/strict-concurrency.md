@@ -151,6 +151,54 @@ struct MutableUser {
 }
 ```
 
+## @unchecked Sendable for External Types
+
+When your type contains types from external packages that aren't yet Sendable, use `@unchecked Sendable` with a TODO comment:
+
+```swift
+@Reducer public struct FeatureTracking {
+    public struct Tracker: Sendable {
+        // TODO: @unchecked Sendable - Contains LegacyRecord (LegacySDK) and CLLocation (CoreLocation)
+        // which are not marked Sendable. Revisit when LegacySDK is modernized to Swift 6.
+        public enum Event: Equatable, @unchecked Sendable {
+            case operationRequested(
+                record: LegacyRecord,    // External type — not Sendable
+                location: CLLocation?    // Apple type — not Sendable
+            )
+            case operationSuccess
+            case operationFailure(String)
+        }
+    }
+}
+```
+
+### When to Use @unchecked Sendable
+
+| Scenario | Use @unchecked Sendable? |
+|----------|-------------------------|
+| External type not Sendable (CLLocation, etc.) | ✅ Yes, with TODO |
+| Apple framework type not Sendable | ✅ Yes, with TODO |
+| Your own mutable class | ❌ No, make it an actor |
+| Immutable reference type | ✅ Yes, if truly immutable |
+| Type with `var` properties | ❌ No, use actor or redesign |
+
+### Common External Types Requiring @unchecked
+
+- `CLLocation`, `CLLocationCoordinate2D` (CoreLocation)
+- Types from legacy Obj-C frameworks not yet audited for Sendable
+- Third-party SDK types
+
+### @preconcurrency import Alternative
+
+For imports from packages not yet migrated, use `@preconcurrency import`:
+
+```swift
+@preconcurrency import LegacySDK  // Suppresses Sendable warnings for LegacyRecord, LegacyUser, etc.
+import CoreLocation  // CLLocation still requires @unchecked Sendable
+```
+
+**Prefer @preconcurrency** for entire modules. Use **@unchecked Sendable** for individual types when the import approach isn't sufficient.
+
 ## Migration Strategy
 
 1. Enable strict concurrency in one module at a time
@@ -158,3 +206,4 @@ struct MutableUser {
 3. Add @MainActor to view models and UI classes
 4. Add @Sendable to closure parameters
 5. Use @preconcurrency for legacy dependencies (see modern-attributes.md)
+6. Add TODO comments to @unchecked Sendable uses for future cleanup
