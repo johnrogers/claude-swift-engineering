@@ -155,21 +155,97 @@ All features automatic when using glass:
 - **Increased Contrast**: Black/white with contrasting border
 - **Reduced Motion**: Decreases effect intensity
 
+## GlassEffectContainer
+
+Group multiple glass effects for performance and morphing animations:
+
+```swift
+GlassEffectContainer(spacing: 8) {
+    HStack(spacing: 8) {
+        Button { } label: { Image(systemName: "plus") }
+            .glassEffect()
+            .glassEffectID("add", in: namespace)
+
+        Button { } label: { Image(systemName: "share") }
+            .glassEffect()
+            .glassEffectID("share", in: namespace)
+    }
+}
+```
+
+- Groups glass effects for better rendering performance
+- Enables morphing transitions between elements
+- Use `spacing` parameter to control when effects blend together
+
+## Morphing with glassEffectID
+
+Use `@Namespace` and `.glassEffectID()` for smooth morphing transitions:
+
+```swift
+@Namespace var namespace
+
+// Elements with same ID morph into each other during transitions
+if isExpanded {
+    ExpandedView()
+        .glassEffect()
+        .glassEffectID("panel", in: namespace)
+} else {
+    CollapsedView()
+        .glassEffect()
+        .glassEffectID("panel", in: namespace)
+}
+```
+
+## Interactive Glass
+
+Add touch response with `.interactive()` chained on the glass variant:
+
+```swift
+// Correct - chain .interactive() on the variant
+Button("Tap") { }
+    .glassEffect(.regular.interactive())
+
+// With tint
+Button("Tap") { }
+    .glassEffect(.regular.interactive().tint(.blue))
+
+// With custom shape
+Button("Tap") { }
+    .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 12))
+```
+
+**Caution**: Avoid `.interactive()` on draggable rows - it can interfere with drag gestures.
+
+## Known Limitations
+
+**Drag previews**: Glass effects don't render correctly in drag previews. When using `.contentShape(.dragPreview, ...)`, the glass material won't appear during the lift animation. Use simple shapes for drag previews:
+
+```swift
+// Glass won't show in drag preview - this is expected
+MyGlassCard()
+    .glassEffect()
+    .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 12))
+```
+
 ## API Reference
 
 ```swift
 // Basic glass effect
 func glassEffect<S: Shape>(
-    in shape: S = Capsule(),
-    isInteractive: Bool = false
+    _ glass: Glass = .regular,
+    in shape: S = Capsule()
 ) -> some View
 
-// Variant-specific
-func glassEffect<S: Shape>(
-    _ variant: GlassVariant, // .regular or .clear
-    in shape: S = Capsule(),
-    isInteractive: Bool = false
-) -> some View
+// Glass variant modifiers (chainable)
+Glass.regular.interactive()           // Adds touch response
+Glass.regular.tint(.color)            // Adds color tint
+Glass.regular.interactive().tint(.color) // Both
+
+// Morphing support
+func glassEffectID<ID: Hashable>(_ id: ID, in namespace: Namespace.ID) -> some View
+
+// Container for multiple effects
+GlassEffectContainer(spacing: CGFloat) { content }
 
 // For custom views (reflects surrounding content)
 func glassBackgroundEffect() -> some View

@@ -296,3 +296,83 @@ func testEffectCancellation() async {
     #expect(isCancelled == true)
 }
 ```
+
+## Testing @Shared State
+
+### Use .dependencies Trait for Test Isolation
+
+Add `.dependencies` to `@Suite` to ensure each test gets fresh dependencies:
+
+```swift
+@MainActor
+@Suite(
+    "SettingsFeature",
+    .dependency(\.continuousClock, ImmediateClock()),
+    .dependencies  // Ensures fresh dependencies per test for determinism
+)
+struct SettingsFeatureTests {
+    // ...
+}
+```
+
+Without `.dependencies`, tests may share state and produce non-deterministic results.
+
+### Setting Up @Shared in Tests
+
+Declare `@Shared` variables at test scope to both initialize and verify state:
+
+```swift
+@Test("enables notifications when toggled on")
+func testEnablesNotifications() async {
+    // Declare @Shared at test scope for verification
+    @Shared(.appStorage("notificationsEnabled")) var notificationsEnabled = false
+
+    let store = TestStore(initialState: SettingsFeature.State()) {
+        SettingsFeature()
+    } withDependencies: {
+        $0.notificationClient.requestAuthorization = { true }
+    }
+
+    await store.send(.view(.notificationToggleTapped))
+    await store.receive(\.delegate.notificationsConfigured) {
+        // Assert @Shared mutation in state closure
+        $0.$notificationsEnabled.withLock { $0 = true }
+    }
+
+    // Can also verify outside store
+    #expect(notificationsEnabled == true)
+}
+```
+
+### Asserting @Shared Mutations in receive
+
+When effects mutate `@Shared` state, assert those changes in the `receive` closure:
+
+```swift
+await store.receive(\.delegate.settingsSaved) {
+    $0.isSaving = false
+    // Assert @Shared mutations using withLock
+    $0.$darkModeEnabled.withLock { $0 = true }
+    $0.$accentColor.withLock { $0 = "blue" }
+}
+```
+
+**IMPORTANT:** For TestStore to observe `@Shared` mutations, the `@Shared` property must be declared in State and captured before the `.run` closure. Declaring `@Shared` inside the effect creates a disconnected instance that TestStore cannot observe.
+
+### Testing @Shared Toggle Actions
+
+```swift
+@Test("dark mode toggle updates shared setting")
+func testDarkModeToggle() async {
+    @Shared(.appStorage("darkModeEnabled")) var darkModeEnabled = false
+
+    let store = TestStore(initialState: AppearanceFeature.State()) {
+        AppearanceFeature()
+    }
+
+    await store.send(.view(.darkModeToggled(true))) {
+        $0.$darkModeEnabled.withLock { $0 = true }
+    }
+    await store.finish()
+}
+```

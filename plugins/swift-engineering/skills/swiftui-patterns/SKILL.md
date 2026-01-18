@@ -1,6 +1,7 @@
 ---
 name: swiftui-patterns
-description: Use when implementing iOS 17+ SwiftUI patterns: @Observable/@Bindable, MVVM architecture, NavigationStack, lazy loading, UIKit interop, accessibility (VoiceOver/Dynamic Type), async operations (.task/.refreshable), or migrating from ObservableObject/@StateObject.
+description: >-
+  Use when implementing iOS 17+ SwiftUI patterns: @Observable/@Bindable, MVVM architecture, NavigationStack, lazy loading, UIKit interop, accessibility (VoiceOver/Dynamic Type), async operations (.task/.refreshable), or migrating from ObservableObject/@StateObject.
 ---
 
 # SwiftUI Patterns (iOS 17+)
